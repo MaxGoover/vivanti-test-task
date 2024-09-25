@@ -24,5 +24,5 @@ Route::middleware([
 });
 
 Route::get('/news', function () {
-    return Inertia::render('News/PageNewsIndex');
+    return Inertia::render('news/PageNewsIndex');
 });
