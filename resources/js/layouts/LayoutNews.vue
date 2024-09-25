@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import NewsHeader from "@/Components/News/NewsHeader.vue";
+import NewsHeader from "@/components/News/NewsHeader.vue";
 </script>

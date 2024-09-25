@@ -1,14 +1,14 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import AuthenticationCardLogo from '@/components/AuthenticationCardLogo.vue';
 
 defineProps({
-    policy: String,
+    terms: String,
 });
 </script>
 
 <template>
-    <Head title="Privacy Policy" />
+    <Head title="Terms of Service" />
 
     <div class="font-sans text-gray-900 antialiased">
         <div class="pt-4 bg-gray-100">
@@ -17,7 +17,7 @@ defineProps({
                     <AuthenticationCardLogo />
                 </div>
 
-                <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose" v-html="policy" />
+                <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose" v-html="terms" />
             </div>
         </div>
     </div>

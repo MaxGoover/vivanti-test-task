@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import LayoutNews from '@/Layouts/LayoutNews.vue'
+import LayoutNews from '@/layouts/LayoutNews.vue'
 
 defineOptions({
   layout: LayoutNews,
