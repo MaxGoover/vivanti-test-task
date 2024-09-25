@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/components/ActionMessage.vue';
-import ActionSection from '@/components/ActionSection.vue';
-import Checkbox from '@/components/Checkbox.vue';
-import ConfirmationModal from '@/components/ConfirmationModal.vue';
-import DangerButton from '@/components/DangerButton.vue';
-import DialogModal from '@/components/DialogModal.vue';
-import FormSection from '@/components/FormSection.vue';
-import InputError from '@/components/InputError.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import PrimaryButton from '@/components/PrimaryButton.vue';
-import SecondaryButton from '@/components/SecondaryButton.vue';
-import SectionBorder from '@/components/SectionBorder.vue';
-import TextInput from '@/components/TextInput.vue';
+import ActionMessage from '@/components/jetstream/ActionMessage.vue';
+import ActionSection from '@/components/jetstream/ActionSection.vue';
+import Checkbox from '@/components/jetstream/Checkbox.vue';
+import ConfirmationModal from '@/components/jetstream/ConfirmationModal.vue';
+import DangerButton from '@/components/jetstream/DangerButton.vue';
+import DialogModal from '@/components/jetstream/DialogModal.vue';
+import FormSection from '@/components/jetstream/FormSection.vue';
+import InputError from '@/components/jetstream/InputError.vue';
+import InputLabel from '@/components/jetstream/InputLabel.vue';
+import PrimaryButton from '@/components/jetstream/PrimaryButton.vue';
+import SecondaryButton from '@/components/jetstream/SecondaryButton.vue';
+import SectionBorder from '@/components/jetstream/SectionBorder.vue';
+import TextInput from '@/components/jetstream/TextInput.vue';
 
 const props = defineProps({
     tokens: Array,
