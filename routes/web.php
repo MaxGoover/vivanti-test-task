@@ -22,3 +22,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::get('/news', function () {
+    return Inertia::render('News/PageNewsIndex');
+});
