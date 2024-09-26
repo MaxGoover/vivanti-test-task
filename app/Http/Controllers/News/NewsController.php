@@ -41,11 +41,6 @@ class NewsController extends Controller
     public function show(News $news)
     {
         return inertia('news/PageNewsShow', [
-            'article' => [
-                'title' => $news->title,
-                'content' => $news->content,
-                'countViews' => $news->count_views,
-            ],
             'comments' => NewsComment::where('news_id', $news->id)->latest()
                 ->paginate(config('settings.news.comments.pagination.rowsPerPage'))
                 ->through(fn($comment) => [
@@ -55,7 +50,13 @@ class NewsController extends Controller
                     'parent_id' => $comment->parent_id,
                     'title' => $comment->title,
                 ]),
-            'countComments' => NewsComment::where('news_id', $news->id)->count(),
+            'news' => [
+                'title' => $news->title,
+                'content' => $news->content,
+                'countComments' => NewsComment::where('news_id', $news->id)->count(),
+                'countViews' => $news->count_views,
+                'created_at' => $news->created_at->toDateTimeString(),
+            ],
         ]);
     }
 
