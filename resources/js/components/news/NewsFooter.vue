@@ -1,5 +1,5 @@
 <template>
-    <footer class="sticky bottom-0 z-10">
+    <footer class="bottom-0 z-10">
         <nav>
             <ul class="flex items-center justify-around border-t">
                 <li class="flex-1">
