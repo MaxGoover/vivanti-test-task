@@ -14,10 +14,11 @@ class NewsController extends Controller
         return inertia('news/PageNewsIndex', [
             'news' => News::latest()
                 ->paginate(config('settings.news.pagination.rowsPerPage'))
-                ->through(fn($article) => [
-                    'title' => $article->title,
-                    'content' => $article->content,
-                    'countViews' => $article->count_views,
+                ->through(fn($news) => [
+                    'content' => $news->content,
+                    'countViews' => $news->count_views,
+                    'id' => $news->id,
+                    'title' => $news->title,
                 ]),
         ]);
     }
