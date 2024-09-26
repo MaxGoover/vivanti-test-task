@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\News\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/news', function () {
-    return Inertia::render('news/PageNewsIndex');
-});
+Route::resource('/news', NewsController::class);
