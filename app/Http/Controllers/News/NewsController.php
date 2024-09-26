@@ -4,6 +4,7 @@ namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
 use App\Models\News\News;
+use App\Models\News\NewsComment;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -37,12 +38,25 @@ class NewsController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(News $news)
     {
-        //
+        return inertia('news/PageNewsShow', [
+            'article' => [
+                'title' => $news->title,
+                'content' => $news->content,
+                'countViews' => $news->count_views,
+            ],
+            'comments' => NewsComment::where('news_id', $news->id)->latest()
+                ->paginate(config('settings.news.comments.pagination.rowsPerPage'))
+                ->through(fn($comment) => [
+                    'content' => $comment->content,
+                    'created_at' => $comment->created_at->toDateTimeString(),
+                    'id' => $comment->id,
+                    'parent_id' => $comment->parent_id,
+                    'title' => $comment->title,
+                ]),
+            'countComments' => NewsComment::where('news_id', $news->id)->count(),
+        ]);
     }
 
     /**
