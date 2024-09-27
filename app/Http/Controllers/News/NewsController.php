@@ -46,17 +46,17 @@ class NewsController extends Controller
                 ->paginate(config('settings.news.comments.pagination.rowsPerPage'))
                 ->through(fn($comment) => [
                     'content' => $comment->content,
-                    'created_at' => $comment->created_at->toDateTimeString(),
+                    'created_at' => $comment->createdAtFormatted,
                     'id' => $comment->id,
                     'parent_id' => $comment->parent_id,
                     'title' => $comment->title,
                 ]),
             'news' => [
-                'title' => $news->title,
                 'content' => $news->content,
                 'countComments' => NewsComment::where('news_id', $news->id)->count(),
                 'countViews' => $news->count_views,
                 'created_at' => $news->created_at->toDateTimeString(),
+                'title' => $news->title,
             ],
         ]);
     }
