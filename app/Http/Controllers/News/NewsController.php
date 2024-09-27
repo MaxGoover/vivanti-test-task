@@ -42,11 +42,15 @@ class NewsController extends Controller
     public function show(News $news)
     {
         return inertia('news/PageNewsShow', [
-            'comments' => NewsComment::where('news_id', $news->id)->latest()
+            'comments' => NewsComment::with('children')
+                ->where('news_id', $news->id)
+                ->whereNull('parent_id')
+                ->latest()
                 ->paginate(config('settings.news.comments.pagination.rowsPerPage'))
                 ->through(fn($comment) => [
+                    'children' => NewsComment::buildTreeChildren($comment->children()->orderBy('created_at', 'desc')->get()),
                     'content' => $comment->content,
-                    'created_at' => $comment->createdAtFormatted,
+                    'created_at' => $comment->formattedCreatedAt,
                     'id' => $comment->id,
                     'parent_id' => $comment->parent_id,
                     'title' => $comment->title,

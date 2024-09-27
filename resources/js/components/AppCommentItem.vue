@@ -1,5 +1,6 @@
 <template>
     <article>
+        <!-- <pre>{{ comment }}</pre> -->
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
                 <!--Автор комментария-->
@@ -87,14 +88,43 @@
                 Reply
             </button>
         </div>
+
+        <template v-if="hasChildren(comment)">
+            <AppCommentItem
+                v-for="comment in comment.children"
+                :key="comment.id"
+                class="py-6 pl-6 text-base bg-white rounded-lg dark:bg-gray-900"
+                :class="[mlClass]"
+                :comment="comment"
+                :marginLeft="increasedMarginLeft"
+            />
+        </template>
     </article>
 </template>
 
 <script setup>
-defineProps({
+import { computed, ref } from "vue";
+
+const props = defineProps({
     comment: {
         type: Object,
         required: true,
     },
+    marginLeft: {
+        type: Number,
+        required: true,
+    },
 });
+
+let increasedMarginLeft = props.marginLeft;
+
+const mlClass = computed(() => {
+    if (props.marginLeft < 16) {
+        increasedMarginLeft = increasedMarginLeft + 4;
+    }
+
+    return `ml-${increasedMarginLeft}`;
+});
+
+const hasChildren = (comment) => comment.children.length;
 </script>

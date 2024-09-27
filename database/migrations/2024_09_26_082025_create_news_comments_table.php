@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('news_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('news_id');
-            $table->bigInteger('parent_id')->nullable(true);
+            $table->bigInteger('parent_id')->nullable();
             $table->text('content')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
@@ -19,6 +19,12 @@ return new class extends Migration
             $table->foreign('news_id')
                 ->references('id')
                 ->on('news')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('news_comments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
