@@ -11,7 +11,7 @@ class NewsFactory extends Factory
 {
     public function definition(): array
     {
-        $titleLength = rand(10, 500);
+        $titleLength = rand(10, 100);
         $contentLength = rand(10, 10000);
 
         return [

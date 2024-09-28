@@ -1,18 +1,33 @@
 <template>
     <div>
         <!--Заголовок новости-->
-        <h1>{{ $page.props.news.title }}</h1>
+        <div class="my-6 text-4xl font-medium">
+            <span>
+                {{ $page.props.news.title }}
+            </span>
+        </div>
 
         <!--Мета-данные новости-->
-        <div class="flex items-center justify-between">
-            <div>
-                <span>{{ $page.props.news.created_at }}</span
-                ><span>Иванов И.И., к.м.н.</span>
-            </div>
-            <div>
-                <span>Просмотры {{ $page.props.news.countViews }}</span>
-                <span>Лайки 43</span>
-                <span>Комментарии {{ $page.props.news.countComments }}</span>
+        <div class="mb-7">
+            <span>{{ $page.props.news.created_at }}</span>
+            <div class="flex flex-row justify-between">
+                <span>Иванов И.И., к.м.н.</span>
+                <ul class="flex flex-row gap-8">
+                    <li>
+                        <EyeIcon class="h-5 inline-flex mr-1" />
+                        {{ $page.props.news.countViews }}
+                    </li>
+                    <li>
+                        <HandThumbUpIcon class="h-5 inline-flex mr-1" />
+                        43
+                    </li>
+                    <li>
+                        <ChatBubbleLeftIcon
+                            class="h-5 inline-flex mr-1 text-sky-700"
+                        />
+                        {{ $page.props.news.countComments }}
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -26,6 +41,7 @@
         <!--Содержание новости-->
         <div v-html="$page.props.news.content" />
 
+        <!--Комментарии-->
         <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
             <div class="max-w-2xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
@@ -54,6 +70,9 @@
 </template>
 
 <script setup>
+import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
+import { EyeIcon } from "@heroicons/vue/24/solid";
+import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
 import AppCommentForm from "@/components/AppCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";

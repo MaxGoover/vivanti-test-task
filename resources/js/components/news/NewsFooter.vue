@@ -24,12 +24,16 @@
                             </li>
                         </ul>
                     </nav>
-                    <div class="text-zinc-400 text-sm font-light">esculap &copy; 2012-{{ currentYear }}</div>
+                    <div class="text-zinc-400 text-sm font-light">
+                        esculap &copy; 2012-{{ currentYear }}
+                    </div>
                 </div>
 
                 <div class="basis-2/3">
                     <nav class="mb-12">
-                        <ul class="flex justify-between font-condensed text-zinc-500 text-lg">
+                        <ul
+                            class="flex justify-between font-condensed text-zinc-500 text-lg"
+                        >
                             <li v-for="link in links" :key="link">
                                 <a class="uppercase" href="#">
                                     {{ link }}
@@ -69,9 +73,3 @@ const links = [
     "Помощь",
 ];
 </script>
-
-<!-- <style scoped>
-.container {
-    width: 1180px;
-}
-</style> -->
