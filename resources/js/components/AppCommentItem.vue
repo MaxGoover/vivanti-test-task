@@ -1,6 +1,6 @@
 <template>
     <article>
-        <!-- <pre>{{ comment }}</pre> -->
+        <!--Мета-данные комментария-->
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
                 <!--Автор комментария-->
@@ -93,7 +93,7 @@
             <AppCommentItem
                 v-for="comment in comment.children"
                 :key="comment.id"
-                class="py-6 pl-6 text-base bg-white rounded-lg dark:bg-gray-900"
+                class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
                 :class="[mlClass]"
                 :comment="comment"
                 :marginLeft="increasedMarginLeft"
@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
     comment: {
@@ -119,7 +119,7 @@ const props = defineProps({
 let increasedMarginLeft = props.marginLeft;
 
 const mlClass = computed(() => {
-    if (props.marginLeft < 16) {
+    if (props.marginLeft <= 16) {
         increasedMarginLeft = increasedMarginLeft + 4;
     }
 

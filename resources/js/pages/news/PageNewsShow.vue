@@ -43,7 +43,7 @@
                 <AppCommentItem
                     v-for="comment in $page.props.comments.data"
                     :key="comment.id"
-                    class="py-6 pl-6 text-base bg-white rounded-lg dark:bg-gray-900"
+                    class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
                     :class="[mlClass]"
                     :comment="comment"
                     :marginLeft="marginLeft"
