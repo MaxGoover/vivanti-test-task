@@ -11,13 +11,7 @@ use Throwable;
 
 class NewsCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    public function index() {}
 
     public function create(NewsCommentCreateRequest $request): JsonResponse
     {

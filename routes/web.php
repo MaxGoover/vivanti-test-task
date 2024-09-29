@@ -1,5 +1,7 @@
 <?php
 
+use App\Actions\News\NewsCommentIndexAction;
+use App\Actions\News\NewsIndexAction;
 use App\Http\Controllers\News\NewsCommentController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Foundation\Application;
@@ -26,5 +28,10 @@ Route::middleware([
 });
 
 Route::resource('/news', NewsController::class);
-// Route::resource('/news/comments', NewsCommentController::class);
+
 Route::post('/news/comments', [NewsCommentController::class, 'create']);
+
+// queries
+Route::get('/api/news', NewsIndexAction::class);
+
+Route::get('/api/news/{id}/comments', NewsCommentIndexAction::class);

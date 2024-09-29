@@ -21,11 +21,20 @@
 </template>
 
 <script setup>
+import { toast } from "vue3-toastify";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
+import config from "@/utils/settings/config";
 
 const newsComments = useNewsCommentsStore();
 
 const save = () => {
-    newsComments.create();
+    newsComments
+        .create()
+        .then((res) => {
+            toast.success(res.data.message, config.toast);
+            newsComments.clearList();
+            newsComments.index();
+        })
+        .catch((err) => toast.error(err.message, config.toast));
 };
 </script>

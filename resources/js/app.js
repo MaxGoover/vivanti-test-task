@@ -1,5 +1,6 @@
 import "./bootstrap";
 import "../css/app.css";
+import "../css/global.css";
 
 // import styles for vue3-toastify
 import "vue3-toastify/dist/index.css";

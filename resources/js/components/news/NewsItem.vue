@@ -64,7 +64,7 @@ defineProps({
 <style scoped>
 .news-title {
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     display: -webkit-box;
     line-height: 1.5em;
     max-height: 3em;
@@ -74,10 +74,10 @@ defineProps({
 }
 .news-content {
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 6;
     display: -webkit-box;
     line-height: 1.5em;
-    max-height: 4.5em;
+    max-height: 9em;
     overflow: hidden;
     padding-top: 0;
     text-overflow: ellipsis;

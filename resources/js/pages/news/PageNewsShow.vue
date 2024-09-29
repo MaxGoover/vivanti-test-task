@@ -1,11 +1,9 @@
 <template>
     <div>
         <!--Заголовок новости-->
-        <div class="my-6 text-4xl font-medium">
-            <span>
-                {{ $page.props.news.title }}
-            </span>
-        </div>
+        <h1>
+            {{ $page.props.news.title }}
+        </h1>
 
         <!--Мета-данные новости-->
         <div class="mb-7">
@@ -42,14 +40,13 @@
         <div v-html="$page.props.news.content" />
 
         <!--Комментарии-->
-        <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+        <section
+            v-if="!newsComments.isEmptyList"
+            class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased"
+        >
             <div class="max-w-2xl mx-auto px-4">
                 <div class="flex justify-between items-center mb-6">
-                    <h2
-                        class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white"
-                    >
-                        Комментарии ({{ $page.props.news.countComments }})
-                    </h2>
+                    <h3>Обсуждение ({{ newsComments.count }})</h3>
                 </div>
 
                 <!--Форма для комментария-->
@@ -57,7 +54,7 @@
 
                 <!--Список комментариев-->
                 <AppCommentItem
-                    v-for="comment in $page.props.comments.data"
+                    v-for="comment in newsComments.list"
                     :key="comment.id"
                     class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
                     :class="[mlClass]"
@@ -66,6 +63,27 @@
                 />
             </div>
         </section>
+
+        <section v-else>Комментариев нет</section>
+
+        <!--Обсервер, подгружающий комментарии-->
+        <div class="invisible" ref="observerLazyLoadComments"></div>
+
+        <template v-if="!news.isEmptyList">
+            <h3>Читайте так же</h3>
+
+            <!--Рекомендации-->
+            <div class="grid grid-cols-2 gap-10 mb-10">
+                <NewsItem
+                    v-for="news in news.list"
+                    :key="news.id"
+                    :news="news"
+                />
+            </div>
+        </template>
+
+        <!--Обсервер, подгружающий новости-->
+        <div class="invisible" ref="observerLazyLoadNews"></div>
     </div>
 </template>
 
@@ -73,24 +91,66 @@
 import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
 import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
-import { onMounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useNewsStore } from "@/stores/news/news";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
 import { usePage } from "@inertiajs/vue3";
 import AppCommentForm from "@/components/AppCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
+import NewsItem from "@/components/news/NewsItem.vue";
 
 defineOptions({
     layout: LayoutNews,
 });
 
+const news = useNewsStore();
 const newsComments = useNewsCommentsStore();
 const page = usePage();
 
 const marginLeft = 0;
 const mlClass = `ml-${marginLeft}`;
 
+const observerLazyLoadComments = ref(null);
+const observerLazyLoadNews = ref(null);
+const observer = ref(null);
+
 onMounted(() => {
     newsComments.setFormNewsId(page.props.news.id);
+
+    observer.value = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            console.log('entry', entry);
+
+            if (entry.isIntersecting) {
+                if (entry.target === observerLazyLoadComments.value) {
+                    newsComments.index();
+                } else if (entry.target === observerLazyLoadNews.value) {
+                    news.index();
+                }
+                observer.value.unobserve(entry.target);
+            }
+        });
+    });
+
+    if (observerLazyLoadComments.value) {
+        observer.value.observe(observerLazyLoadComments.value);
+    }
+
+    if (observerLazyLoadNews.value) {
+        observer.value.observe(observerLazyLoadNews.value);
+    }
+});
+
+onUnmounted(() => {
+    if (observer.value) {
+        if (observerLazyLoadComments.value) {
+            observer.value.unobserve(observerLazyLoadComments.value);
+        }
+
+        if (observerLazyLoadNews.value) {
+            observer.value.unobserve(observerLazyLoadNews.value);
+        }
+    }
 });
 </script>

@@ -5,9 +5,8 @@ export default {
         show: (id) => `/news/${id}`,
     },
     newsComments: {
-        create: '/news/comments',
-        delete: (id) => `/news/comments/${id}`,
-        update: (id) => `/news/comments/${id}`,
+        create: "/news/comments",
+        index: (id) => `/news/${id}/comments/`,
     },
     home: {
         index: "/",
