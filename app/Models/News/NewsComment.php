@@ -13,6 +13,8 @@ class NewsComment extends Model
     use HasFactory;
 
     protected $fillable = [
+        'news_id',
+        'parent_id',
         'content',
     ];
 

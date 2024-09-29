@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\News\NewsCommentController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,5 @@ Route::middleware([
 });
 
 Route::resource('/news', NewsController::class);
+// Route::resource('/news/comments', NewsCommentController::class);
+Route::post('/news/comments', [NewsCommentController::class, 'create']);

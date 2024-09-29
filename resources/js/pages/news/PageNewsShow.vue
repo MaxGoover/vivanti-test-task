@@ -73,6 +73,9 @@
 import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
 import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
+import { onMounted } from "vue";
+import { useNewsCommentsStore } from "@/stores/news/newsComments";
+import { usePage } from "@inertiajs/vue3";
 import AppCommentForm from "@/components/AppCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
@@ -81,6 +84,13 @@ defineOptions({
     layout: LayoutNews,
 });
 
+const newsComments = useNewsCommentsStore();
+const page = usePage();
+
 const marginLeft = 0;
 const mlClass = `ml-${marginLeft}`;
+
+onMounted(() => {
+    newsComments.setFormNewsId(page.props.news.id);
+});
 </script>

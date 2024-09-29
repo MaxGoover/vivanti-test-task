@@ -60,6 +60,7 @@ class NewsController extends Controller
                 'countComments' => NewsComment::where('news_id', $news->id)->count(),
                 'countViews' => $news->count_views,
                 'created_at' => $news->created_at->format('d.m.Y'),
+                'id' => $news->id,
                 'title' => $news->title,
             ],
         ]);
