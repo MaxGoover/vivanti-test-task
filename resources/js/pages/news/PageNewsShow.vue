@@ -35,18 +35,28 @@
         </div>
 
         <!--Содержание новости-->
-        <div v-html="$page.props.news.content" class="mt-12 text-justify" />
+        <div v-html="$page.props.news.content" class="my-12 text-justify" />
 
-        <!--Комментарии-->
-        <section v-if="!newsComments.isEmptyList" class="mt-10">
-            <!--Форма для комментария-->
-            <AppCommentForm class="mb-6" />
-
-            <div class="flex justify-between items-center mb-6">
-                <h3>Обсуждение ({{ newsComments.count }})</h3>
+        <!--Войдите или зарегистрируйтесь-->
+        <div class="h-44 bg-gray-300 flex items-center">
+            <div>
+                <Link href="#" class="text-sky-700 underline font-bold">Войдите или зарегистрируйтесь.</Link>
+                <p>
+                    Только зарегистрированные пользователи могут комментировать
+                    публикацию и читать комментарии других пользователей.
+                </p>
             </div>
+        </div>
 
-            <!--Список комментариев-->
+        <!--Форма для комментария-->
+        <AppCommentForm class="mt-10 mb-6" />
+
+        <div class="flex justify-between items-center mb-6">
+            <h3>Обсуждение ({{ newsComments.count }})</h3>
+        </div>
+
+        <!--Список комментариев-->
+        <section v-if="!newsComments.isEmptyList">
             <AppCommentItem
                 v-for="comment in newsComments.list"
                 :key="comment.id"
@@ -56,8 +66,7 @@
                 :marginLeft="marginLeft"
             />
         </section>
-
-        <section v-else>Комментариев нет</section>
+        <section v-else class="my-10">Комментариев нет</section>
 
         <!--Обсервер, подгружающий комментарии-->
         <div class="invisible" ref="observerLazyLoadComments"></div>
@@ -84,6 +93,7 @@
 import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
 import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
+import { Link } from "@inertiajs/vue3";
 import { onMounted, onUnmounted, ref } from "vue";
 import { useNewsStore } from "@/stores/news/news";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
