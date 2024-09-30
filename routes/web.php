@@ -27,6 +27,3 @@ Route::middleware([
 
 // News
 Route::resource('/news', NewsController::class);
-
-// NewsComment
-Route::post('/news/comments', [NewsCommentController::class, 'create']);

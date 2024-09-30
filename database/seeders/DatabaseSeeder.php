@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
     {
         News::factory(10)->create();
         NewsComment::factory(10)->create();
-        NewsComment::factory(20)->create();
+        NewsComment::factory(30)->create();
     }
 }

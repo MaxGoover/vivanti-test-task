@@ -38,28 +38,23 @@
         <div v-html="$page.props.news.content" class="mt-12 text-justify" />
 
         <!--Комментарии-->
-        <section
-            v-if="!newsComments.isEmptyList"
-            class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased"
-        >
-            <div class="max-w-2xl mx-auto px-4">
-                <div class="flex justify-between items-center mb-6">
-                    <h3>Обсуждение ({{ newsComments.count }})</h3>
-                </div>
+        <section v-if="!newsComments.isEmptyList" class="mt-10">
+            <!--Форма для комментария-->
+            <AppCommentForm class="mb-6" />
 
-                <!--Форма для комментария-->
-                <AppCommentForm class="mb-6" />
-
-                <!--Список комментариев-->
-                <AppCommentItem
-                    v-for="comment in newsComments.list"
-                    :key="comment.id"
-                    class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
-                    :class="[mlClass]"
-                    :comment="comment"
-                    :marginLeft="marginLeft"
-                />
+            <div class="flex justify-between items-center mb-6">
+                <h3>Обсуждение ({{ newsComments.count }})</h3>
             </div>
+
+            <!--Список комментариев-->
+            <AppCommentItem
+                v-for="comment in newsComments.list"
+                :key="comment.id"
+                class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
+                :class="[mlClass]"
+                :comment="comment"
+                :marginLeft="marginLeft"
+            />
         </section>
 
         <section v-else>Комментариев нет</section>

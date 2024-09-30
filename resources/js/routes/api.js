@@ -4,6 +4,7 @@ export default {
         index: "/api/news",
     },
     newsComments: {
+        create: (id) => `/api/news/${id}/comments`,
         index: (id) => `/api/news/${id}/comments`,
     },
 };

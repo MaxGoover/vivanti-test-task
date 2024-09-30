@@ -24,7 +24,7 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          * @returns {Promise}
          */
         async create() {
-            return axios.post(route.newsComments.create, this.form);
+            return axios.post(routeApi.newsComments.create(this.form.news_id), this.form);
         },
 
         /**
