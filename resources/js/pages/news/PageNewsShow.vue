@@ -30,14 +30,12 @@
         </div>
 
         <!--Картинка новости-->
-        <img
-            src="https://cdn.quasar.dev/img/mountains.jpg"
-            alt="Фото гор"
-            height="500"
-        />
+        <div>
+            <img src="/images/news-image.jpg" alt="Фото гор" />
+        </div>
 
         <!--Содержание новости-->
-        <div v-html="$page.props.news.content" />
+        <div v-html="$page.props.news.content" class="mt-12 text-justify" />
 
         <!--Комментарии-->
         <section

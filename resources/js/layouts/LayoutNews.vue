@@ -3,7 +3,7 @@
     <div class="min-h-screen flex flex-col">
         <NewsHeader />
         <AppBreadcrumbs class="mx-16" />
-        <main class="flex flex-grow flex-col mt-7 mx-16">
+        <main class="flex flex-grow flex-col mt-7 mx-32">
             <slot />
         </main>
         <NewsFooter />
