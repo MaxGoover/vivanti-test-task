@@ -8,7 +8,7 @@ return [
             ],
         ],
         'pagination' => [
-            'rowsPerPage' => 10,
+            'rowsPerPage' => 9,
         ],
     ],
 ];

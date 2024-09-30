@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-3 gap-8">
+    <div class="grid grid-cols-3 gap-8 mb-8">
         <NewsItem
             v-for="news in $page.props.news.data"
             :key="news.id"
