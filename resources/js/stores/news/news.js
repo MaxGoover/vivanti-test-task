@@ -17,8 +17,6 @@ export const useNewsStore = defineStore("news", {
          * @returns {Promise}
          */
         async index() {
-            console.log('news');
-
             return axios.get(routeApi.news.index).then((res) => {
                 this.addListNews(res.data.news.data);
             });

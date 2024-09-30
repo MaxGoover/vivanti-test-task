@@ -32,13 +32,11 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          * @returns {Promise}
          */
         async index() {
-            console.log('comments');
-
             return axios
                 .get(routeApi.newsComments.index(this.form.news_id))
                 .then((res) => {
-                    this.addListComments(res.data.comments.data)
-                    this.setCount(res.data.countComments)
+                    this.addListComments(res.data.comments.data);
+                    this.setCount(res.data.countComments);
                 });
         },
 

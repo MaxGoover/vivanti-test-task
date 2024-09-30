@@ -27,11 +27,16 @@ Route::middleware([
     })->name('dashboard');
 });
 
+/** views **/
+// News
 Route::resource('/news', NewsController::class);
 
+// NewsComment
 Route::post('/news/comments', [NewsCommentController::class, 'create']);
 
-// queries
+/** actions **/
+// News
 Route::get('/api/news', NewsIndexAction::class);
 
+// NewsComment
 Route::get('/api/news/{id}/comments', NewsCommentIndexAction::class);

@@ -120,8 +120,6 @@ onMounted(() => {
 
     observer.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            console.log('entry', entry);
-
             if (entry.isIntersecting) {
                 if (entry.target === observerLazyLoadComments.value) {
                     newsComments.index();
