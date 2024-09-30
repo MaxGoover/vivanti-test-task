@@ -1,7 +1,5 @@
 <?php
 
-use App\Actions\News\NewsCommentIndexAction;
-use App\Actions\News\NewsIndexAction;
 use App\Http\Controllers\News\NewsCommentController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Foundation\Application;
@@ -27,16 +25,8 @@ Route::middleware([
     })->name('dashboard');
 });
 
-/** views **/
 // News
 Route::resource('/news', NewsController::class);
 
 // NewsComment
 Route::post('/news/comments', [NewsCommentController::class, 'create']);
-
-/** actions **/
-// News
-Route::get('/api/news', NewsIndexAction::class);
-
-// NewsComment
-Route::get('/api/news/{id}/comments', NewsCommentIndexAction::class);

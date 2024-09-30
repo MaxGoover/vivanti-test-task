@@ -28,7 +28,7 @@ class NewsCommentFactory extends Factory
         return [
             'content' => fake()->realText($contentLength),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
-            'news_id' => $news->id,
+            'news_id' => $hasParentNewsComment ? $newsComment->news_id : $news->id,
             'parent_id' => $hasParentNewsComment ? $newsComment->id : null,
         ];
     }
