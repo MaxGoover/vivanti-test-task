@@ -8,7 +8,7 @@
                     href="#"
                     class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
                 >
-                    Home
+                    Главная
                 </a>
             </li>
             <li>
@@ -17,7 +17,7 @@
                     <a
                         href="#"
                         class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-                        >Projects</a
+                        >Новости</a
                     >
                 </div>
             </li>

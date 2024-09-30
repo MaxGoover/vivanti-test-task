@@ -30,7 +30,7 @@
         </div>
 
         <!--Картинка новости-->
-        <div>
+        <div class="flex justify-center">
             <img src="/images/news-image.jpg" alt="Фото гор" />
         </div>
 
