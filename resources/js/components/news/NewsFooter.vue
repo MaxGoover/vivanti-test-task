@@ -2,6 +2,7 @@
     <footer class="bottom-0 z-10 py-20 border-t">
         <div class="mx-20">
             <div class="flex flex-row">
+                <!--Логотип + соц.сети-->
                 <div class="basis-1/3 grid grid-cols-1">
                     <a
                         href="https://esculap-med.ru/MARKUP/build/index.html"
@@ -29,6 +30,7 @@
                     </div>
                 </div>
 
+                <!--Панель навигации-->
                 <div class="basis-2/3">
                     <nav class="mb-12">
                         <ul
