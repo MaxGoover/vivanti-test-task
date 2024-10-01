@@ -1,5 +1,7 @@
 <template>
     <div>
+        <AppBreadcrumbs class="mt-7" :breadcrumbs="breadcrumbs" />
+
         <!--Заголовок новости-->
         <h1>
             {{ $page.props.news.title }}
@@ -95,9 +97,10 @@ import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 import { onMounted, onUnmounted, ref } from "vue";
-import { useNewsStore } from "@/stores/news/news";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
+import { useNewsStore } from "@/stores/news/news";
 import { usePage } from "@inertiajs/vue3";
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
 import AppCommentForm from "@/components/AppCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
@@ -117,6 +120,21 @@ const mlClass = `ml-${marginLeft}`;
 const observerLazyLoadComments = ref(null);
 const observerLazyLoadNews = ref(null);
 const observer = ref(null);
+
+const breadcrumbs = [
+    {
+        href: "/",
+        name: "Главная",
+    },
+    {
+        href: "/news",
+        name: "Новости",
+    },
+    {
+        href: `/news/${page.props.news.id}`,
+        name: page.props.news.title,
+    },
+];
 
 onMounted(() => {
     newsComments.setFormNewsId(page.props.news.id);

@@ -1,37 +1,34 @@
 <template>
     <nav class="flex" aria-label="Breadcrumb">
         <ol
-            class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
+            class="inline-flex items-center space-x-1 text-xs"
         >
-            <li class="inline-flex items-center">
+            <li
+                v-for="(breadcrumb, index) in breadcrumbs"
+                :key="breadcrumb"
+                class="inline-flex items-center"
+            >
+                <span v-if="index" class="mr-2">/</span>
                 <a
-                    href="#"
-                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                    v-if="index !== breadcrumbs.length - 1"
+                    :href="breadcrumb.href"
+                    class="inline-flex items-center font-medium underline text-gray-500 hover:text-blue-600"
                 >
-                    Главная
+                    {{ breadcrumb.name }}
                 </a>
-            </li>
-            <li>
-                <div class="flex items-center">
-                    /
-                    <a
-                        href="#"
-                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-                        >Новости</a
-                    >
-                </div>
-            </li>
-            <li aria-current="page">
-                <div class="flex items-center">
-                    /
-                    <span
-                        class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"
-                        >Flowbite</span
-                    >
-                </div>
+                <span v-else class="font-medium text-gray-400">{{
+                    breadcrumb.name
+                }}</span>
             </li>
         </ol>
     </nav>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+    breadcrumbs: {
+        type: Array,
+        required: true,
+    },
+});
+</script>
