@@ -1,48 +1,53 @@
 <template>
     <div>
-        <AppBreadcrumbs class="mt-7" :breadcrumbs="breadcrumbs" />
+        <div class="mx-32">
+            <!--Хлебные крошки-->
+            <AppBreadcrumbs class="mt-7" :breadcrumbs="breadcrumbs" />
 
-        <!--Заголовок новости-->
-        <h1>
-            {{ $page.props.news.title }}
-        </h1>
+            <!--Заголовок новости-->
+            <h1>
+                {{ $page.props.news.title }}
+            </h1>
 
-        <!--Мета-данные новости-->
-        <div class="mb-7">
-            <span>{{ $page.props.news.created_at }}</span>
-            <div class="flex flex-row justify-between">
-                <span>Иванов И.И., к.м.н.</span>
-                <ul class="flex flex-row gap-8">
-                    <li>
-                        <EyeIcon class="h-5 inline-flex mr-1" />
-                        {{ $page.props.news.countViews }}
-                    </li>
-                    <li>
-                        <HandThumbUpIcon class="h-5 inline-flex mr-1" />
-                        43
-                    </li>
-                    <li>
-                        <ChatBubbleLeftIcon
-                            class="h-5 inline-flex mr-1 text-sky-700"
-                        />
-                        {{ $page.props.news.countComments }}
-                    </li>
-                </ul>
+            <!--Мета-данные новости-->
+            <div class="mb-7">
+                <span>{{ $page.props.news.created_at }}</span>
+                <div class="flex flex-row justify-between">
+                    <span>Иванов И.И., к.м.н.</span>
+                    <ul class="flex flex-row gap-8">
+                        <li>
+                            <EyeIcon class="h-5 inline-flex mr-1" />
+                            {{ $page.props.news.countViews }}
+                        </li>
+                        <li>
+                            <HandThumbUpIcon class="h-5 inline-flex mr-1" />
+                            43
+                        </li>
+                        <li>
+                            <ChatBubbleLeftIcon
+                                class="h-5 inline-flex mr-1 text-sky-700"
+                            />
+                            {{ $page.props.news.countComments }}
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <!--Картинка новости-->
-        <div class="flex justify-center">
-            <img src="/images/news-image.jpg" alt="Фото гор" />
-        </div>
+            <!--Картинка новости-->
+            <div class="flex justify-center">
+                <img src="/images/news-image.jpg" alt="Фото гор" />
+            </div>
 
-        <!--Содержание новости-->
-        <div v-html="$page.props.news.content" class="my-12 text-justify" />
+            <!--Содержание новости-->
+            <div v-html="$page.props.news.content" class="my-12 text-justify" />
+        </div>
 
         <!--Войдите или зарегистрируйтесь-->
         <div class="h-44 bg-gray-300 flex items-center">
-            <div>
-                <Link href="#" class="text-sky-700 underline font-bold">Войдите или зарегистрируйтесь.</Link>
+            <div class="mx-32 text-lg">
+                <Link href="#" class="text-sky-700 underline font-bold"
+                    >Войдите или зарегистрируйтесь.</Link
+                >
                 <p>
                     Только зарегистрированные пользователи могут комментировать
                     публикацию и читать комментарии других пользователей.
@@ -50,44 +55,46 @@
             </div>
         </div>
 
-        <!--Форма для комментария-->
-        <AppCommentForm class="mt-10 mb-6" />
+        <div class="mx-32">
+            <!--Форма для комментария-->
+            <AppCommentForm class="mt-10 mb-6" />
 
-        <div class="flex justify-between items-center mb-6">
-            <h3>Обсуждение ({{ newsComments.count }})</h3>
-        </div>
-
-        <!--Список комментариев-->
-        <section v-if="!newsComments.isEmptyList">
-            <AppCommentItem
-                v-for="comment in newsComments.list"
-                :key="comment.id"
-                class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
-                :class="[mlClass]"
-                :comment="comment"
-                :marginLeft="marginLeft"
-            />
-        </section>
-        <section v-else class="my-10">Комментариев нет</section>
-
-        <!--Обсервер, подгружающий комментарии-->
-        <div class="invisible" ref="observerLazyLoadComments"></div>
-
-        <template v-if="!news.isEmptyList">
-            <h3>Читайте так же</h3>
-
-            <!--Рекомендации-->
-            <div class="grid grid-cols-2 gap-10 mb-10">
-                <NewsItem
-                    v-for="news in news.list"
-                    :key="news.id"
-                    :news="news"
-                />
+            <div class="flex justify-between items-center mb-6">
+                <h3>Обсуждение ({{ newsComments.count }})</h3>
             </div>
-        </template>
 
-        <!--Обсервер, подгружающий новости-->
-        <div class="invisible" ref="observerLazyLoadNews"></div>
+            <!--Список комментариев-->
+            <section v-if="!newsComments.isEmptyList">
+                <AppCommentItem
+                    v-for="comment in newsComments.list"
+                    :key="comment.id"
+                    class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
+                    :class="[mlClass]"
+                    :comment="comment"
+                    :marginLeft="marginLeft"
+                />
+            </section>
+            <section v-else class="my-10">Комментариев нет</section>
+
+            <!--Обсервер, подгружающий комментарии-->
+            <div class="invisible" ref="observerLazyLoadComments"></div>
+
+            <template v-if="!news.isEmptyList">
+                <h3>Читайте так же</h3>
+
+                <!--Рекомендации-->
+                <div class="grid grid-cols-2 gap-10 mb-10">
+                    <NewsItem
+                        v-for="news in news.list"
+                        :key="news.id"
+                        :news="news"
+                    />
+                </div>
+            </template>
+
+            <!--Обсервер, подгружающий новости-->
+            <div class="invisible" ref="observerLazyLoadNews"></div>
+        </div>
     </div>
 </template>
 

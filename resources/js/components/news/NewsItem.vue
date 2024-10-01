@@ -1,27 +1,20 @@
 <template>
-    <div
-        class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-    >
+    <div>
         <Link :href="route.news.show(news.id)">
             <!--Картинка новости-->
             <img
                 src="https://cdn.quasar.dev/img/mountains.jpg"
-                class="rounded-t-lg"
                 alt="Фото гор"
             />
 
             <div class="p-5">
                 <!--Заголовок новости-->
-                <h5
-                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white news-title"
-                >
+                <h5 class="mb-2 text-2xl font-bold tracking-tight news-title">
                     {{ news.title }}
                 </h5>
 
                 <!--Содержание новости-->
-                <p
-                    class="font-normal text-gray-700 dark:text-gray-400 news-content"
-                >
+                <p class="font-normal text-gray-700 news-content">
                     {{ news.content }}
                 </p>
             </div>

@@ -1,7 +1,9 @@
 <template>
     <div>
+        <!--Хлебные крошки-->
         <AppBreadcrumbs class="mt-7" :breadcrumbs="breadcrumbs" />
 
+        <!--Список новостей-->
         <div class="grid grid-cols-3 gap-8 my-8">
             <NewsItem
                 v-for="news in $page.props.news.data"

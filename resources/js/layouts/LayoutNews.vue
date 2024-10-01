@@ -2,7 +2,7 @@
     <!--Шаблон новостей-->
     <div class="min-h-screen flex flex-col">
         <NewsHeader />
-        <main class="flex flex-grow flex-col mx-32">
+        <main class="flex flex-grow flex-col">
             <slot />
         </main>
         <NewsFooter />
