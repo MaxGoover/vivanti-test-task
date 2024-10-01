@@ -46,11 +46,10 @@
         <div class="h-44 bg-gray-300 flex items-center">
             <div class="mx-32 text-lg">
                 <Link href="#" class="text-sky-700 underline font-bold"
-                    >Войдите или зарегистрируйтесь.</Link
+                    >{{ $t('appeal.enterOrSignUp') }}.</Link
                 >
                 <p>
-                    Только зарегистрированные пользователи могут комментировать
-                    публикацию и читать комментарии других пользователей.
+                    {{ $t('site.registeredCanLeaveComment') }}.
                 </p>
             </div>
         </div>
@@ -60,7 +59,7 @@
             <AppCommentForm class="mt-10 mb-6" />
 
             <div class="flex justify-between items-center mb-6">
-                <h3>Обсуждение ({{ newsComments.count }})</h3>
+                <h3>{{ $t('title.discussion') }} ({{ newsComments.count }})</h3>
             </div>
 
             <!--Список комментариев-->
@@ -74,13 +73,13 @@
                     :marginLeft="marginLeft"
                 />
             </section>
-            <section v-else class="my-10">Комментариев нет</section>
+            <section v-else class="my-10">{{ $t('no.comments') }}</section>
 
             <!--Обсервер, подгружающий комментарии-->
             <div class="invisible" ref="observerLazyLoadComments"></div>
 
             <template v-if="!news.isEmptyList">
-                <h3>Читайте так же</h3>
+                <h3>{{ $t('title.readAlso') }}</h3>
 
                 <!--Рекомендации-->
                 <div class="grid grid-cols-2 gap-10 mb-10">
@@ -99,6 +98,7 @@
 </template>
 
 <script setup>
+import { $t } from '@/boot/i18n';
 import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
 import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
@@ -131,11 +131,11 @@ const observer = ref(null);
 const breadcrumbs = [
     {
         href: "/",
-        name: "Главная",
+        name: $t('menu.home'),
     },
     {
         href: "/news",
-        name: "Новости",
+        name: $t('menu.news'),
     },
     {
         href: `/news/${page.props.news.id}`,

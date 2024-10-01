@@ -1,13 +1,11 @@
 <template>
     <div>
-        <div
-            class="py-2 px-4 mb-4 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-        >
+        <div class="py-2 px-4 mb-4 bg-white border border-gray-200">
             <textarea
-                rows="6"
-                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                placeholder="Оставить комментарий"
+                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
                 required
+                rows="6"
+                :placeholder="$t('action.leaveComment')"
                 >{{ newsComments.form.content }}
             </textarea>
         </div>
@@ -15,7 +13,7 @@
             class="inline-flex items-center py-3.5 px-20 text-2xl font-normal text-sky-700 border-2 border-sky-700 hover:text-white hover:bg-blue-500"
             @click="save"
         >
-            Написать сообщение
+            {{ $t("action.writeMessage") }}
         </button>
     </div>
 </template>

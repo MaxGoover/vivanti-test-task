@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\News\NewsCommentController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;

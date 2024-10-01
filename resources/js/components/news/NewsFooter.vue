@@ -10,8 +10,8 @@
                     >
                         <img
                             src="/images/logo-gray.png"
-                            alt="Логотип компании 'Эскулап'"
                             width="140"
+                            :alt="`${$t('image.logoCompany')} ${$t('site.name')}`"
                         />
                     </a>
                     <nav class="mb-8">
@@ -44,18 +44,10 @@
                         </ul>
                     </nav>
                     <p class="text-zinc-400 text-sm font-bold">
-                        Сайт ESCULAP.ru предназначен исключительно для
-                        медицинских работников.
+                        {{ $t('site.notIntended') }}.
                     </p>
                     <p class="text-zinc-400 text-sm font-light">
-                        Размещенная на сайте информация может быть использована
-                        только специалистами здравоохранения и не может быть
-                        использована пациентами для принятия решения о
-                        применении каких-либо продуктов или услуг. Данная
-                        информация не может рассматрироваться как рекомендация
-                        пациентам по диагностирования и лечению каких-либо
-                        заболеваний и не может служить заменой очной
-                        консультации с врачом.
+                        {{ $t('site.notRecommendation') }}..
                     </p>
                 </div>
             </div>
@@ -64,14 +56,15 @@
 </template>
 
 <script setup>
+import { $t } from "@/boot/i18n";
 import { ChatBubbleBottomCenterTextIcon } from "@heroicons/vue/24/outline";
 
 const currentYear = new Date().getFullYear();
 const links = [
-    "О проекте",
-    "Спонсорам",
-    "Контакты",
-    "Конфиденциальность",
-    "Помощь",
+    $t('menu.aboutProject'),
+    $t('menu.toSponsors'),
+    $t('menu.contacts'),
+    $t('menu.confidentiality'),
+    $t('menu.help'),
 ];
 </script>

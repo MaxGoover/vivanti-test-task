@@ -5,6 +5,9 @@ import "../css/global.css";
 // import styles for vue3-toastify
 import "vue3-toastify/dist/index.css";
 
+// Import i18n
+import { i18n } from './boot/i18n';
+
 // Import Pinia
 import { createPinia } from "pinia";
 const pinia = createPinia();
@@ -25,6 +28,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(i18n)
             .use(pinia)
             .mount(el);
     },

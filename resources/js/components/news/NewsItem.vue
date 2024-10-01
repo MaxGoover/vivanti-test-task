@@ -4,7 +4,7 @@
             <!--Картинка новости-->
             <img
                 src="https://cdn.quasar.dev/img/mountains.jpg"
-                alt="Фото гор"
+                :alt="$t('image.mountains')"
             />
 
             <div class="p-5">

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mx-32">
         <!--Хлебные крошки-->
         <AppBreadcrumbs class="mt-7" :breadcrumbs="breadcrumbs" />
 
@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import { $t } from '@/boot/i18n';
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
 import NewsItem from "@/components/news/NewsItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
@@ -26,11 +27,11 @@ defineOptions({
 const breadcrumbs = [
     {
         href: "/",
-        name: "Главная",
+        name: $t("menu.home"),
     },
     {
         href: "/news",
-        name: "Новости",
+        name: $t("menu.news"),
     },
 ];
 </script>

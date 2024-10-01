@@ -5,7 +5,11 @@
         <!--Логотип-->
         <div class="h-16">
             <a href="/news">
-                <img src="/logo.png" class="h-16" alt="Логотип Виванти" />
+                <img
+                    src="/logo.png"
+                    class="h-16"
+                    :alt="`${$t('image.logoCompany')} ${$t('company.name')}`"
+                />
             </a>
         </div>
 
@@ -13,14 +17,25 @@
         <div>
             <ul class="flex flex-row items-center h-full text-sm font-medium">
                 <li class="ml-2.5">
-                    <NewsMenuDropdown title="Обучение" :menu="menuLearning" />
+                    <NewsMenuDropdown
+                        :menu="menuEducation"
+                        :title="$t('menu.education')"
+                    />
                 </li>
                 <li class="ml-2.5">
-                    <NewsMenuDropdown title="Эксперты" :menu="menuPublishes" />
+                    <NewsMenuDropdown
+                        :menu="menuPublications"
+                        :title="$t('menu.experts')"
+                    />
                 </li>
-                <li class="ml-2.5 text-white uppercase">Публикации</li>
+                <li class="ml-2.5 text-white uppercase">
+                    {{ $t("menu.publications") }}
+                </li>
                 <li class="ml-2.5 text-white">
-                    <NewsMenuDropdown title="О проекте" :menu="menuAboutProject" />
+                    <NewsMenuDropdown
+                        :menu="menuAboutProject"
+                        :title="$t('menu.aboutProject')"
+                    />
                 </li>
             </ul>
         </div>
@@ -29,10 +44,10 @@
         <div>
             <ul class="flex flex-row items-center h-full text-sm font-medium">
                 <li class="ml-2.5 text-white uppercase">
-                    <a href="#" class="px-4"> Регистрация </a>
+                    <a href="#" class="px-4"> {{ $t("action.signUp") }} </a>
                 </li>
                 <li class="ml-2.5 px-5 py-1.5 h-3/6 bg-white uppercase">
-                    <a href="#"> Вход </a>
+                    <a href="#"> {{ $t("action.enter") }} </a>
                 </li>
             </ul>
         </div>
@@ -40,19 +55,28 @@
 </template>
 
 <script setup>
-import NewsMenuDropdown from './NewsMenuDropdown.vue';
+import { $t } from "@/boot/i18n";
+import NewsMenuDropdown from "@/components/news/NewsMenuDropdown.vue";
 
-const menuLearning = ["Эксперты", "Публикации", "О проекте"];
-const menuPublishes = ["Эксперты", "Публикации", "О проекте"];
+const menuEducation = [
+    $t("menu.experts"),
+    $t("menu.publications"),
+    $t("menu.aboutProject"),
+];
+const menuPublications = [
+    $t("menu.experts"),
+    $t("menu.publications"),
+    $t("menu.aboutProject"),
+];
 const menuAboutProject = [
-    "Эксперты",
-    "Публикации",
-    "О проекте",
-    "Эксперты",
-    "Публикации",
-    "О проекте",
-    "Эксперты",
-    "Публикации",
-    "О проекте",
+    $t("menu.experts"),
+    $t("menu.publications"),
+    $t("menu.aboutProject"),
+    $t("menu.experts"),
+    $t("menu.publications"),
+    $t("menu.aboutProject"),
+    $t("menu.experts"),
+    $t("menu.publications"),
+    $t("menu.aboutProject"),
 ];
 </script>
