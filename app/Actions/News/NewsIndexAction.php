@@ -17,7 +17,7 @@ final readonly class NewsIndexAction
                 'news' => News::latest()
                     ->paginate(4)
                     ->through(fn($news) => [
-                        'content' => $news->content,
+                        'content' => $news->previewContent,
                         'countViews' => $news->count_views,
                         'id' => $news->id,
                         'title' => $news->title,

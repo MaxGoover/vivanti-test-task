@@ -25,4 +25,9 @@ class News extends Model
     {
         return NewsFactory::new();
     }
+
+    public function getPreviewContentAttribute()
+    {
+        return mb_substr($this->content, 0, config('settings.news.content.previewLength'));
+    }
 }

@@ -15,7 +15,7 @@ class NewsController extends Controller
             'news' => News::latest()
                 ->paginate(config('settings.news.pagination.rowsPerPage'))
                 ->through(fn($news) => [
-                    'content' => $news->content,
+                    'content' => $news->previewContent,
                     'countViews' => $news->count_views,
                     'id' => $news->id,
                     'title' => $news->title,

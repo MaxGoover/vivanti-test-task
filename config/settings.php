@@ -7,6 +7,9 @@ return [
                 'rowsPerPage' => 10,
             ],
         ],
+        'content' => [
+            'previewLength' => 500,
+        ],
         'pagination' => [
             'rowsPerPage' => 9,
         ],
