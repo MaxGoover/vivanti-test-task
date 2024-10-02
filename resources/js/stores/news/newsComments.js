@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import route from "@/routes/index.js";
 import routeApi from "@/routes/api.js";
 
 export const useNewsCommentsStore = defineStore("newsComments", {
@@ -11,7 +10,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             parent_id: null,
             content: "Тестовый комментарий",
         },
+        isLoadedAll: false,
+        isShowedLoader: false,
         list: [], // список комментариев
+        page: 1, // страница пагинации
     }),
 
     getters: {
@@ -24,7 +26,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          * @returns {Promise}
          */
         async create() {
-            return axios.post(routeApi.newsComments.create(this.form.news_id), this.form);
+            return axios.post(
+                routeApi.newsComments.create(this.form.news_id),
+                this.form
+            );
         },
 
         /**
@@ -32,12 +37,9 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          * @returns {Promise}
          */
         async index() {
-            return axios
-                .get(routeApi.newsComments.index(this.form.news_id))
-                .then((res) => {
-                    this.addListComments(res.data.comments.data);
-                    this.setCount(res.data.countComments);
-                });
+            return axios.get(routeApi.newsComments.index(this.form.news_id), {
+                params: { page: this.page },
+            });
         },
 
         addListComments(comments) {
@@ -48,12 +50,32 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.list = [];
         },
 
+        finishLoadComments() {
+            this.isLoadedAll = true;
+        },
+
+        hideLoader() {
+            this.isShowedLoader = false;
+        },
+
+        isPageLast(lastPage) {
+            return this.page === lastPage;
+        },
+
+        offsetPage() {
+            this.page++;
+        },
+
         setCount(count) {
             this.count = count;
         },
 
         setFormNewsId(newsId) {
             this.form.news_id = newsId;
+        },
+
+        showLoader() {
+            this.isShowedLoader = true;
         },
     },
 });

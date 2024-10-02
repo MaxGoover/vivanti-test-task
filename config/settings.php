@@ -4,7 +4,7 @@ return [
     'news' => [
         'comments' => [
             'pagination' => [
-                'rowsPerPage' => 10,
+                'rowsPerPage' => 5,
             ],
         ],
         'content' => [

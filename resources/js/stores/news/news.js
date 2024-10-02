@@ -4,7 +4,10 @@ import routeApi from "@/routes/api.js";
 
 export const useNewsStore = defineStore("news", {
     state: () => ({
+        isLoadedAll: false,
+        isShowedLoader: false,
         list: [], // список статей
+        page: 1, // страница пагинации
     }),
 
     getters: {
@@ -17,9 +20,10 @@ export const useNewsStore = defineStore("news", {
          * @returns {Promise}
          */
         async index() {
-            return axios.get(routeApi.news.index).then((res) => {
-                this.addListNews(res.data.news.data);
-            });
+            return axios
+                .get(routeApi.news.index, {
+                    params: { page: this.page },
+                })
         },
 
         addListNews(news) {
@@ -28,6 +32,26 @@ export const useNewsStore = defineStore("news", {
 
         clearList() {
             this.list = [];
+        },
+
+        finishLoadNews() {
+            this.isLoadedAll = true;
+        },
+
+        hideLoader() {
+            this.isShowedLoader = false;
+        },
+
+        isPageLast(lastPage) {
+            return this.page === lastPage;
+        },
+
+        offsetPage() {
+            this.page++;
+        },
+
+        showLoader() {
+            this.isShowedLoader = true;
         },
     },
 });
