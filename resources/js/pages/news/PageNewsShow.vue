@@ -226,22 +226,9 @@ const loadComments = () => {
  */
 const loadNews = () => {
     news.showLoader();
-    news.index()
-        .then((res) => {
-            news.addListNews(res.data.news.data);
-
-            if (news.isPageLast(res.data.news.last_page)) {
-                news.finishLoadNews();
-            } else {
-                news.offsetPage();
-            }
-        })
-        .catch(() => {
-            toast.error($t("message.error.news.index"));
-        })
-        .finally(() => {
-            news.hideLoader();
-        });
+    news.loadNews().finally(() => {
+        news.hideLoader();
+    });
 };
 
 onMounted(() => {
