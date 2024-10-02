@@ -1,15 +1,19 @@
 import { defineStore } from "pinia";
+import { toast } from "vue3-toastify";
+import { useForm, usePage } from "@inertiajs/vue3";
 import axios from "axios";
 import routeApi from "@/routes/api.js";
+
+const page = usePage();
 
 export const useNewsCommentsStore = defineStore("newsComments", {
     state: () => ({
         count: 0, // кол-во комментариев к статье
-        form: {
+        form: useForm({
             news_id: null,
             parent_id: null,
-            content: "Тестовый комментарий",
-        },
+            content: "",
+        }),
         isLoadedAll: false,
         isShowedLoader: false,
         list: [], // список комментариев
@@ -42,12 +46,37 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             });
         },
 
+        async loadComments() {
+            return this.index()
+                .then((res) => {
+                    this.addListComments(res.data.comments.data);
+                    this.setCount(res.data.countComments);
+
+                    if (this.isPageLast(res.data.comments.last_page)) {
+                        this.finishLoadComments();
+                    } else {
+                        this.offsetPage();
+                    }
+                })
+                .catch(() => {
+                    toast.error($t("message.error.comment.index"));
+                });
+        },
+
         addListComments(comments) {
             this.list = this.list.concat(comments);
         },
 
         clearList() {
             this.list = [];
+        },
+
+        clearFormContent() {
+            this.form.content = null;
+        },
+
+        clearFormParentId() {
+            this.form.parent_id = null;
         },
 
         finishLoadComments() {
@@ -72,6 +101,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
         setFormNewsId(newsId) {
             this.form.news_id = newsId;
+        },
+
+        setFormParentId(parentId) {
+            this.form.parent_id = parentId;
         },
 
         showLoader() {

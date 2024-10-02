@@ -1,5 +1,5 @@
 <template>
-    <div class="font-light text-slate-700 leading-5 grid-container">
+    <div class="mt-5 font-light text-slate-700 leading-5 grid-container">
         <!--Аватарка-->
         <div>
             <img
@@ -35,12 +35,11 @@
                 {{ comment.content }}
             </p>
 
-            <!--Оценка комментария-->
             <div class="mt-3">
                 <ul class="flex flex-row gap-8">
                     <li>
                         <HandThumbUpIcon class="h-5 inline-flex mr-1" />
-                        43
+                        <span>43</span>
                     </li>
                     <li>
                         <HandThumbUpIcon class="h-5 inline-flex mr-1" />
@@ -49,19 +48,19 @@
                             >Мне нравится</span
                         >
                     </li>
+                    <li class="flex items-center" @click="newsComments.setFormParentId(comment.id)">
+                        <ChatBubbleBottomCenterTextIcon class="h-5 mr-1" />
+                        <span class="ml-2 cursor-pointer hover:underline">{{
+                            $t("action.reply")
+                        }}</span>
+                    </li>
                 </ul>
             </div>
 
-            <!--Ответить-->
-            <div class="flex items-center mt-4 space-x-4">
-                <button
-                    type="button"
-                    class="flex items-center font-medium text-sm hover:underline"
-                >
-                    <ChatBubbleBottomCenterTextIcon class="h-4 mr-2" />
-                    {{ $t("action.reply") }}
-                </button>
-            </div>
+            <AppCommentForm
+                v-if="comment.id === newsComments.form.parent_id"
+                class="mt-10 mb-6"
+            />
 
             <template v-if="hasChildren(comment)">
                 <AppCommentItem
@@ -80,6 +79,8 @@ import {
     ChatBubbleBottomCenterTextIcon,
     HandThumbUpIcon,
 } from "@heroicons/vue/24/outline";
+import AppCommentForm from "@/components/AppCommentForm.vue";
+import { useNewsCommentsStore } from "@/stores/news/newsComments";
 
 const props = defineProps({
     comment: {
@@ -87,6 +88,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const newsComments = useNewsCommentsStore();
 
 const hasChildren = (comment) => comment.children.length;
 </script>

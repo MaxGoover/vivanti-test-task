@@ -214,23 +214,9 @@ const sorts = [
  */
 const loadComments = () => {
     newsComments.showLoader();
-    newsComments
-        .index()
-        .then((res) => {
-            newsComments.addListComments(res.data.comments.data);
-
-            if (newsComments.isPageLast(res.data.comments.last_page)) {
-                newsComments.finishLoadComments();
-            } else {
-                newsComments.offsetPage();
-            }
-        })
-        .catch(() => {
-            toast.error($t("message.error.comment.index"));
-        })
-        .finally(() => {
-            newsComments.hideLoader();
-        });
+    newsComments.loadComments().finally(() => {
+        newsComments.hideLoader();
+    });
 };
 
 /**
