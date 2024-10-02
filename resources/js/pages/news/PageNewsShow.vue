@@ -58,8 +58,28 @@
             <!--Форма для комментария-->
             <AppCommentForm class="mt-10 mb-6" />
 
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-3">
                 <h3>{{ $t("title.discussion") }} ({{ newsComments.count }})</h3>
+            </div>
+
+            <!--Сортировка комментариев-->
+            <div class="text-sm font-medium text-center text-gray-500">
+                <ul class="flex flex-wrap">
+                    <li
+                        v-for="(sort, index) in sorts"
+                        :key="sort.name"
+                        class="inline-block py-2 pl-2"
+                        :class="{
+                            active: sort.isActive,
+                            'cursor-pointer': !sort.isActive,
+                            'hover:underline': !sort.isActive,
+                            'text-sky-700': !sort.isActive,
+                        }"
+                    >
+                        <span v-if="index" class="mr-2">|</span>
+                        <span>{{ sort.name }}</span>
+                    </li>
+                </ul>
             </div>
 
             <!--Список комментариев-->
@@ -181,6 +201,24 @@ const breadcrumbs = [
     },
 ];
 
+const sorts = [
+    {
+        isActive: true,
+        name: $t('sort.first.new'),
+    },
+    {
+        isActive: false,
+        name: $t('sort.first.new'),
+    },
+];
+
+
+
+/**
+ * Загружает комментарии.
+ *
+ * @returns {void}
+ */
 const loadComments = () => {
     newsComments.showLoader();
     newsComments
@@ -202,6 +240,11 @@ const loadComments = () => {
         });
 };
 
+/**
+ * Загружает новости.
+ *
+ * @returns {void}
+ */
 const loadNews = () => {
     news.showLoader();
     news.index()
