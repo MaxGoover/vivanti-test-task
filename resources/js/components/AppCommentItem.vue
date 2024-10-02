@@ -46,10 +46,8 @@
             <AppCommentItem
                 v-for="comment in comment.children"
                 :key="comment.id"
-                class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
-                :class="[mlClass]"
+                class="py-6 pl-8 text-base text-justify"
                 :comment="comment"
-                :marginLeft="increasedMarginLeft"
             />
         </template>
     </article>
@@ -57,27 +55,12 @@
 
 <script setup>
 import { ChatBubbleBottomCenterTextIcon } from "@heroicons/vue/24/outline";
-import { computed } from "vue";
 
 const props = defineProps({
     comment: {
         type: Object,
         required: true,
     },
-    marginLeft: {
-        type: Number,
-        required: true,
-    },
-});
-
-let increasedMarginLeft = props.marginLeft;
-
-const mlClass = computed(() => {
-    if (props.marginLeft <= 16) {
-        increasedMarginLeft = increasedMarginLeft + 4;
-    }
-
-    return `ml-${increasedMarginLeft}`;
 });
 
 const hasChildren = (comment) => comment.children.length;

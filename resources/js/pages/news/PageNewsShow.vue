@@ -87,10 +87,8 @@
                 <AppCommentItem
                     v-for="comment in newsComments.list"
                     :key="comment.id"
-                    class="py-6 pl-4 text-base bg-white rounded-lg dark:bg-gray-900"
-                    :class="[mlClass]"
+                    class="py-6 pl-8 text-base text-justify"
                     :comment="comment"
-                    :marginLeft="marginLeft"
                 />
             </div>
 
@@ -183,9 +181,6 @@ const news = useNewsStore();
 const newsComments = useNewsCommentsStore();
 const page = usePage();
 
-const marginLeft = 0;
-const mlClass = `ml-${marginLeft}`;
-
 const breadcrumbs = [
     {
         href: "/",
@@ -269,5 +264,6 @@ onMounted(() => {
     newsComments.setFormNewsId(page.props.news.id);
     newsComments.setCount(page.props.news.countComments);
     loadNews();
+    loadComments();
 });
 </script>
