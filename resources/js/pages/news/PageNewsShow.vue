@@ -63,7 +63,7 @@
             </div>
 
             <!--Сортировка комментариев-->
-            <div class="text-sm font-medium text-center text-gray-500">
+            <div class="font-normal text-center text-gray-500">
                 <ul class="flex flex-wrap">
                     <li
                         v-for="(sort, index) in sorts"
@@ -87,7 +87,7 @@
                 <AppCommentItem
                     v-for="comment in newsComments.list"
                     :key="comment.id"
-                    class="py-6 pl-8 text-base text-justify"
+                    class="py-6 pl-8 border-b text-justify"
                     :comment="comment"
                 />
             </div>
@@ -199,15 +199,13 @@ const breadcrumbs = [
 const sorts = [
     {
         isActive: true,
-        name: $t('sort.first.new'),
+        name: $t("sort.first.new"),
     },
     {
         isActive: false,
-        name: $t('sort.first.new'),
+        name: $t("sort.first.new"),
     },
 ];
-
-
 
 /**
  * Загружает комментарии.

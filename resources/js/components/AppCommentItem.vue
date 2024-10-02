@@ -1,60 +1,85 @@
 <template>
-    <article>
-        <!--Мета-данные комментария-->
-        <footer class="flex justify-between items-center mb-2">
-            <div class="flex items-center">
-                <!--Автор комментария-->
-                <p
-                    class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"
-                >
-                    <img
-                        class="mr-2 w-6 h-6 rounded-full"
-                        src="/images/user-placeholder.png"
-                        alt="Аватар"
-                    />Имя Фамилия
+    <div class="font-light text-slate-700 leading-5 grid-container">
+        <!--Аватарка-->
+        <div>
+            <img
+                class="w-10 h-10 rounded-full border border-2"
+                src="/images/user-placeholder.png"
+                alt="Аватар"
+            />
+        </div>
+
+        <div>
+            <!--Мета-данные комментария-->
+            <div class="flex justify-between items-center mb-2">
+                <div class="flex">
+                    <!--Автор комментария-->
+                    <p class="inline-flex items-center mr-3">
+                        <span class="mr-1">Имя Фамилия,</span>
+                        <span>профессия</span>
+                    </p>
+                </div>
+
+                <!--Дата публикации комментария-->
+                <p>
+                    <time
+                        :datetime="comment.created_at"
+                        :title="comment.created_at"
+                        >{{ comment.created_at }}</time
+                    >
                 </p>
             </div>
 
-            <!--Дата публикации комментария-->
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                <time
-                    pubdate
-                    :datetime="comment.created_at"
-                    :title="comment.created_at"
-                    >{{ comment.created_at }}</time
-                >
+            <!--Текст комментария-->
+            <p>
+                {{ comment.content }}
             </p>
-        </footer>
 
-        <!--Текст комментария-->
-        <p class="text-gray-500">
-            {{ comment.content }}
-        </p>
+            <!--Оценка комментария-->
+            <div class="mt-3">
+                <ul class="flex flex-row gap-8">
+                    <li>
+                        <HandThumbUpIcon class="h-5 inline-flex mr-1" />
+                        43
+                    </li>
+                    <li>
+                        <HandThumbUpIcon class="h-5 inline-flex mr-1" />
+                        <span
+                            class="ml-2 text-sky-700 cursor-pointer hover:underline"
+                            >Мне нравится</span
+                        >
+                    </li>
+                </ul>
+            </div>
 
-        <!--Ответить-->
-        <div class="flex items-center mt-4 space-x-4">
-            <button
-                type="button"
-                class="flex items-center font-medium text-sm text-gray-500 hover:underline"
-            >
-                <ChatBubbleBottomCenterTextIcon class="h-4 mr-2" />
-                {{ $t("action.reply") }}
-            </button>
+            <!--Ответить-->
+            <div class="flex items-center mt-4 space-x-4">
+                <button
+                    type="button"
+                    class="flex items-center font-medium text-sm hover:underline"
+                >
+                    <ChatBubbleBottomCenterTextIcon class="h-4 mr-2" />
+                    {{ $t("action.reply") }}
+                </button>
+            </div>
+
+            <template v-if="hasChildren(comment)">
+                <AppCommentItem
+                    v-for="comment in comment.children"
+                    :key="comment.id"
+                    class="py-6 pl-8 text-justify"
+                    :comment="comment"
+                />
+            </template>
         </div>
-
-        <template v-if="hasChildren(comment)">
-            <AppCommentItem
-                v-for="comment in comment.children"
-                :key="comment.id"
-                class="py-6 pl-8 text-base text-justify"
-                :comment="comment"
-            />
-        </template>
-    </article>
+    </div>
 </template>
 
 <script setup>
-import { ChatBubbleBottomCenterTextIcon } from "@heroicons/vue/24/outline";
+import {
+    ChatBubbleBottomCenterTextIcon,
+    HandThumbUpIcon,
+} from "@heroicons/vue/24/outline";
 
 const props = defineProps({
     comment: {
@@ -65,3 +90,10 @@ const props = defineProps({
 
 const hasChildren = (comment) => comment.children.length;
 </script>
+
+<style scoped>
+.grid-container {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+}
+</style>
