@@ -87,6 +87,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.isShowedLoader = false;
         },
 
+        isEqualFormParentId(commentId) {
+            return this.form.parent_id === commentId
+        },
+
         isLastInList(index) {
             return this.list.length - 1 === index;
         },

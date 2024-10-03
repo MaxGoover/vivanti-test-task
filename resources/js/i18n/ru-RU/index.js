@@ -1,6 +1,7 @@
 export default {
     action: {
         enter: "Вход",
+        likeMe: "Мне нравится",
         leaveComment: "Оставить комментарий",
         load: {
             comments: "Загрузить комментарии",
@@ -18,6 +19,7 @@ export default {
         name: "Виванти",
     },
     image: {
+        avatar: "Аватар",
         logoCompany: "Логотип компании",
         mountains: "Картинка с изображением гор",
     },

@@ -3,9 +3,9 @@
         <!--Аватарка-->
         <div>
             <img
-                class="w-10 h-10 rounded-full border border-2"
                 src="/images/user-placeholder.png"
-                alt="Аватар"
+                class="w-10 h-10 rounded-full border border-2"
+                :alt="$t('images.avatar')"
             />
         </div>
 
@@ -45,10 +45,13 @@
                         <HandThumbUpIcon class="h-5 inline-flex mr-1" />
                         <span
                             class="ml-2 text-sky-700 cursor-pointer hover:underline"
-                            >Мне нравится</span
+                            >{{ $t("action.likeMe") }}</span
                         >
                     </li>
-                    <li class="flex items-center" @click="newsComments.setFormParentId(comment.id)">
+                    <li
+                        class="flex items-center"
+                        @click="newsComments.setFormParentId(comment.id)"
+                    >
                         <ChatBubbleBottomCenterTextIcon class="h-5 mr-1" />
                         <span class="ml-2 cursor-pointer hover:underline">{{
                             $t("action.reply")
@@ -58,11 +61,11 @@
             </div>
 
             <AppCommentForm
-                v-if="comment.id === newsComments.form.parent_id"
+                v-if="newsComments.isEqualFormParentId(comment.id)"
                 class="mt-10 mb-6"
             />
 
-            <template v-if="hasChildren(comment)">
+            <template v-if="hasCommentChildren(comment)">
                 <AppCommentItem
                     v-for="comment in comment.children"
                     :key="comment.id"
@@ -91,7 +94,11 @@ const props = defineProps({
 
 const newsComments = useNewsCommentsStore();
 
-const hasChildren = (comment) => comment.children.length;
+/**
+ *
+ * @param {Object} comment
+ */
+const hasCommentChildren = (comment) => comment.children.length;
 </script>
 
 <style scoped>
