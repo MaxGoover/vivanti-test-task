@@ -38,7 +38,6 @@
         <li>ОС Linux</li>
         <li>php</li>
         <li>composer</li>
-        <li>npm</li>
         <li>Браузер</li>
     </ul>
 </details>
@@ -58,29 +57,48 @@
     <li>Установить зависимости командой:
       <br>
       <code>
-        composer install && npm install
+        composer install
       </code>
     </li>
-    <li>Запустить локальный сервер с Laravel командой:
+    <li>Запустить контейнеры из сборки sail:
       <br>
       <code>
-        php artisan serve
+        ./vendor/bin/sail up
       </code>
     </li>
-    <li>В другом окне терминала IDE запустить миграции и наполнить таблицы данными командой:
+    <li>В другом окне терминала IDE зайти в контейнер с приложением командой:
       <br>
       <code>
-        php artisan migrate && php artisan db:seed 
+        docker compose exec laravel.test bash
       </code>
     </li>
-    <li>Собрать фронт командой:
+    <li>Запустить миграции командой (находясь внутри контейнера laravel.test):
       <br>
       <code>
-        npm run build 
+        php artisan migrate
       </code>
     </li>
-    <li>Открыть браузер и перейти на вкладку с url: <a href="http://localhost:8000/news">http://localhost:8000/news</a></li>
+    <li>Запустить сидеры командой (находясь внутри контейнера laravel.test):
+      <br>
+      <code>
+        php artisan migrate
+      </code>
+    </li>
+    <li>Установить зависимости для фронта командой (находясь внутри контейнера laravel.test):
+      <br>
+      <code>
+        npm install
+      </code>
+    </li>
+    <li>Собрать фронт командой (находясь внутри контейнера laravel.test):
+      <br>
+      <code>
+        npm run build
+      </code>
+    </li>
+    <li>Открыть браузер и перейти на вкладку с url: <a href="http://localhost:80/news">http://localhost:80/news</a></li>
     <li>В случае успеха, вы должны увидеть список кликабельных новостей</li>
+    <li>"Внутри" новости можно оставлять/подгружать комменатрии и новости в секции "Читайте дальше"</li>
   </ol>
 </details>
 
