@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+import { $t } from "@/boot/i18n";
 import { storeToRefs } from "pinia";
 import { toast } from "vue3-toastify";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
@@ -36,6 +37,7 @@ const save = () => {
             newsComments.clearFormParentId();
             newsComments.clearFormContent();
             newsComments.loadComments();
+            toast.success($t("message.success.comment.create"), config.toast);
         })
         .catch((err) => toast.error(err.message, config.toast));
 };

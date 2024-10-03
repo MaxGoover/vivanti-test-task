@@ -87,6 +87,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.isShowedLoader = false;
         },
 
+        isLastInList(index) {
+            return this.list.length - 1 === index;
+        },
+
         isPageLast(lastPage) {
             return this.page === lastPage;
         },

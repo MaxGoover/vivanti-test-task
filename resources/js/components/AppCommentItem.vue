@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5 font-light text-slate-700 leading-5 grid-container">
+    <div class="mt-2 font-light text-slate-700 leading-5 grid-container">
         <!--Аватарка-->
         <div>
             <img

@@ -83,12 +83,15 @@
             </div>
 
             <!--Список комментариев-->
-            <div v-if="!newsComments.isEmptyList">
+            <div v-if="!newsComments.isEmptyList" class="mb-8">
                 <AppCommentItem
-                    v-for="comment in newsComments.list"
+                    v-for="(comment, index) in newsComments.list"
                     :key="comment.id"
-                    class="py-6 pl-8 border-b text-justify"
+                    class="py-6 pl-8 text-justify"
                     :comment="comment"
+                    :class="{
+                        'border-b': !newsComments.isLastInList(index),
+                    }"
                 />
             </div>
 
