@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('news_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('news_id');
-            $table->bigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('news_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->text('content')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
