@@ -1,23 +1,24 @@
+import { $t } from "@/boot/i18n";
+import { clone } from "lodash";
 import { defineStore } from "pinia";
+import { NewsComment } from "@/entities/news/NewsComment.js";
 import { toast } from "vue3-toastify";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import axios from "axios";
+import config from "@/utils/settings/config";
 import routeApi from "@/routes/api.js";
-
-const page = usePage();
 
 export const useNewsCommentsStore = defineStore("newsComments", {
     state: () => ({
         count: 0, // кол-во комментариев к статье
-        form: useForm({
-            news_id: null,
-            parent_id: null,
-            content: "",
-        }),
+        form: useForm(new NewsComment()),
         isLoadedAll: false,
         isShowedLoader: false,
+        isShowedReplyModal: false,
         list: [], // список комментариев
+        news_id: null,
         page: 1, // страница пагинации
+        selected: useForm(new NewsComment()),
     }),
 
     getters: {
@@ -31,7 +32,7 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          */
         async create() {
             return axios.post(
-                routeApi.newsComments.create(this.form.news_id),
+                routeApi.newsComments.create(this.news_id),
                 this.form
             );
         },
@@ -41,7 +42,7 @@ export const useNewsCommentsStore = defineStore("newsComments", {
          * @returns {Promise}
          */
         async index() {
-            return axios.get(routeApi.newsComments.index(this.form.news_id), {
+            return axios.get(routeApi.newsComments.index(this.news_id), {
                 params: { page: this.page },
             });
         },
@@ -59,8 +60,27 @@ export const useNewsCommentsStore = defineStore("newsComments", {
                     }
                 })
                 .catch(() => {
-                    toast.error($t("message.error.comment.index"));
+                    toast.error(
+                        $t("message.error.comment.index"),
+                        config.toast
+                    );
                 });
+        },
+
+        async saveComment() {
+            this.setFormNewsId(this.news_id);
+            this.create()
+                .then(() => {
+                    this.clearList();
+                    this.clearFormParentId();
+                    this.clearFormContent();
+                    this.loadComments();
+                    toast.success(
+                        $t("message.success.comment.create"),
+                        config.toast
+                    );
+                })
+                .catch((err) => toast.error(err.message, config.toast));
         },
 
         addListComments(comments) {
@@ -69,6 +89,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
         clearList() {
             this.list = [];
+        },
+
+        clearSelected() {
+            this.selected = new NewsComment();
         },
 
         clearFormContent() {
@@ -87,8 +111,12 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.isShowedLoader = false;
         },
 
-        isEqualFormParentId(commentId) {
-            return this.form.parent_id === commentId
+        hideReplyModal() {
+            this.isShowedReplyModal = false;
+        },
+
+        isCommentSelected(commentId) {
+            return this.selected.id === commentId;
         },
 
         isLastInList(index) {
@@ -111,12 +139,20 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.form.news_id = newsId;
         },
 
-        setFormParentId(parentId) {
-            this.form.parent_id = parentId;
+        setNewsId(newsId) {
+            this.news_id = newsId;
+        },
+
+        setSelected(comment) {
+            this.selected = clone(comment);
         },
 
         showLoader() {
             this.isShowedLoader = true;
+        },
+
+        showReplyModal() {
+            this.isShowedReplyModal = true;
         },
     },
 });

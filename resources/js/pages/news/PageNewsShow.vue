@@ -6,7 +6,7 @@
         <!--Новость-->
         <div class="mx-32">
             <!--Заголовок новости-->
-            <h1>
+            <h1 class="my-6">
                 {{ $page.props.news.title }}
             </h1>
 
@@ -56,10 +56,19 @@
         <!--Комментарии-->
         <div class="mx-32">
             <!--Форма для комментария-->
-            <AppCommentForm class="mt-10 mb-6" />
+            <NewsCommentForm class="mt-10 mb-6" />
 
-            <div class="flex justify-between items-center mb-3">
-                <h3>{{ $t("title.discussion") }} ({{ newsComments.count }})</h3>
+            <button
+                class="inline-flex items-center py-3.5 px-20 text-2xl font-normal text-sky-700 border-2 border-sky-700 hover:text-white hover:bg-blue-500"
+                @click="newsComments.saveComment"
+            >
+                {{ $t("action.writeMessage") }}
+            </button>
+
+            <div class="flex justify-between items-center mt-14">
+                <h3 class="my-4">
+                    {{ $t("title.discussion") }} ({{ newsComments.count }})
+                </h3>
             </div>
 
             <!--Сортировка комментариев-->
@@ -123,7 +132,7 @@
         <!--Рекомендации-->
         <div class="mx-32">
             <template v-if="!news.isEmptyList">
-                <h3>{{ $t("title.readAlso") }}</h3>
+                <h3 class="my-4">{{ $t("title.readAlso") }}</h3>
 
                 <!--Список новостей-->
                 <div class="grid grid-cols-2 gap-10 mb-10">
@@ -165,12 +174,11 @@ import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 import { onMounted } from "vue";
-import { toast } from "vue3-toastify";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
 import { useNewsStore } from "@/stores/news/news";
 import { usePage } from "@inertiajs/vue3";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
-import AppCommentForm from "@/components/AppCommentForm.vue";
+import NewsCommentForm from "@/components/news/newsComment/NewsCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import AppSpinner from "@/components/AppSpinner.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
@@ -235,7 +243,7 @@ const loadNews = () => {
 };
 
 onMounted(() => {
-    newsComments.setFormNewsId(page.props.news.id);
+    newsComments.setNewsId(page.props.news.id);
     newsComments.setCount(page.props.news.countComments);
     loadNews();
     loadComments();

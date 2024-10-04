@@ -1,16 +1,19 @@
 <template>
-    <div class="modal-mask">
-        <div class="modal-wrapper">
-            <div class="modal-container">
-                <div class="modal-title">
+    <div class="bg-black/50 table fixed h-full left-0 top-0 w-full z-50">
+        <div class="table-cell align-middle">
+            <div
+                class="bg-white flex flex-col mx-auto my-0 p-8"
+                :class="`h-${height} w-${width}`"
+            >
+                <div>
                     <slot name="title" />
                 </div>
 
-                <div class="modal-content">
+                <div class="flex flex-grow flex-col">
                     <slot name="content" />
                 </div>
 
-                <div class="modal-actions">
+                <div class="bottom-0 z-10">
                     <slot name="actions" />
                 </div>
             </div>
@@ -18,44 +21,20 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+    height: {
+        type: String,
+        default: "3/6",
+    },
+    width: {
+        type: String,
+        default: "3/6",
+    },
+});
+</script>
 
 <style scoped>
-.modal-mask {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: table;
-}
-
-.modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.modal-container {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-.modal-title h3 {
-    margin-top: 0;
-    color: #42b983;
-}
-
-.modal-content {
-    margin: 20px 0;
-}
-
 .modal-enter-active,
 .modal-leave-active {
     transition: opacity 0.5s ease;

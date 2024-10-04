@@ -1,5 +1,7 @@
 export default {
     action: {
+        delete: "Удалить",
+        edit: "Редактировать",
         enter: "Вход",
         likeMe: "Мне нравится",
         leaveComment: "Оставить комментарий",
@@ -74,5 +76,8 @@ export default {
     title: {
         discussion: "Обсуждение",
         readAlso: "Читайте так же",
+        reply: {
+            comment: "Ответить на комментарий",
+        },
     },
 };

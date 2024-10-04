@@ -1,11 +1,11 @@
 <template>
-    <div class="mt-2 font-light text-slate-700 leading-5 grid-container">
+    <div class="font-light text-slate-700 leading-5 grid-container">
         <!--Аватарка-->
         <div>
             <img
                 src="/images/user-placeholder.png"
                 class="w-10 h-10 rounded-full border border-2"
-                :alt="$t('images.avatar')"
+                :alt="$t('image.avatar')"
             />
         </div>
 
@@ -18,16 +18,19 @@
                         <span class="mr-1">Имя Фамилия,</span>
                         <span>профессия</span>
                     </p>
+
+                    <!--Дата публикации комментария-->
+                    <p>
+                        <time
+                            :datetime="comment.created_at"
+                            :title="comment.created_at"
+                            >{{ comment.created_at }}</time
+                        >
+                    </p>
                 </div>
 
-                <!--Дата публикации комментария-->
-                <p>
-                    <time
-                        :datetime="comment.created_at"
-                        :title="comment.created_at"
-                        >{{ comment.created_at }}</time
-                    >
-                </p>
+                <!--Меню действий-->
+                <NewsCommentDropdown v-if="withDropdown" :comment="comment" />
             </div>
 
             <!--Текст комментария-->
@@ -35,6 +38,7 @@
                 {{ comment.content }}
             </p>
 
+            <!--Лайки-->
             <div class="mt-3">
                 <ul class="flex flex-row gap-8">
                     <li>
@@ -48,23 +52,16 @@
                             >{{ $t("action.likeMe") }}</span
                         >
                     </li>
-                    <li
-                        class="flex items-center"
-                        @click="newsComments.setFormParentId(comment.id)"
-                    >
-                        <ChatBubbleBottomCenterTextIcon class="h-5 mr-1" />
-                        <span class="ml-2 cursor-pointer hover:underline">{{
-                            $t("action.reply")
-                        }}</span>
-                    </li>
                 </ul>
             </div>
 
-            <AppCommentForm
-                v-if="newsComments.isEqualFormParentId(comment.id)"
+            <!-- Ответить на комментарий
+            <NewsCommentForm
+                v-if="newsComments.isCommentSelected(comment.id)"
                 class="mt-10 mb-6"
-            />
+            /> -->
 
+            <!--Список комментариев на текущий комментарий-->
             <template v-if="hasCommentChildren(comment)">
                 <AppCommentItem
                     v-for="comment in comment.children"
@@ -78,17 +75,19 @@
 </template>
 
 <script setup>
-import {
-    ChatBubbleBottomCenterTextIcon,
-    HandThumbUpIcon,
-} from "@heroicons/vue/24/outline";
-import AppCommentForm from "@/components/AppCommentForm.vue";
-import { useNewsCommentsStore } from "@/stores/news/newsComments";
+import { $t } from "@/boot/i18n";
+import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
+import { useNewsCommentsStore } from "@/stores//news/newsComments";
+import NewsCommentDropdown from "@/components/news/newsComment/NewsCommentDropdown.vue";
 
 const props = defineProps({
     comment: {
         type: Object,
         required: true,
+    },
+    withDropdown: {
+        type: Boolean,
+        default: true,
     },
 });
 
