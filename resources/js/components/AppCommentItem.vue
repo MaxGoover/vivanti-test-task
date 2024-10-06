@@ -55,14 +55,8 @@
                 </ul>
             </div>
 
-            <!-- Ответить на комментарий
-            <NewsCommentForm
-                v-if="newsComments.isCommentSelected(comment.id)"
-                class="mt-10 mb-6"
-            /> -->
-
             <!--Список комментариев на текущий комментарий-->
-            <template v-if="hasCommentChildren(comment)">
+            <template v-if="hasCommentChildren(comment) && withChildren">
                 <AppCommentItem
                     v-for="comment in comment.children"
                     :key="comment.id"
@@ -84,6 +78,10 @@ const props = defineProps({
     comment: {
         type: Object,
         required: true,
+    },
+    withChildren: {
+        type: Boolean,
+        default: true,
     },
     withDropdown: {
         type: Boolean,

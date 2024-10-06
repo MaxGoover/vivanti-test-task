@@ -139,6 +139,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.form.news_id = newsId;
         },
 
+        setFormParentId(commentId) {
+            this.form.parent_id = commentId;
+        },
+
         setNewsId(newsId) {
             this.news_id = newsId;
         },

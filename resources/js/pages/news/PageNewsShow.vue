@@ -96,7 +96,7 @@
                 <AppCommentItem
                     v-for="(comment, index) in newsComments.list"
                     :key="comment.id"
-                    class="py-6 pl-8 text-justify"
+                    class="py-6 text-justify"
                     :comment="comment"
                     :class="{
                         'border-b': !newsComments.isLastInList(index),

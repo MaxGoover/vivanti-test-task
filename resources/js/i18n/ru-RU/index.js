@@ -1,5 +1,6 @@
 export default {
     action: {
+        cancel: "Отменить",
         delete: "Удалить",
         edit: "Редактировать",
         enter: "Вход",
@@ -11,6 +12,7 @@ export default {
             news: "Загрузить новости",
         },
         reply: "Ответить",
+        save: "Сохранить",
         signUp: "Регистрация",
         writeMessage: "Написать сообщение",
     },

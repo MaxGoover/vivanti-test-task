@@ -78,6 +78,7 @@ const showDropdown = () => {
 const toggleDropdown = () => {
     if (!isShowedDropdown.value) {
         newsComments.setSelected(props.comment);
+        newsComments.setFormParentId(props.comment.id);
         showDropdown();
     } else {
         newsComments.clearSelected();
