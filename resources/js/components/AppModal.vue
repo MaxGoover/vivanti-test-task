@@ -1,9 +1,10 @@
 <template>
-    <div class="bg-black/50 table fixed h-full left-0 top-0 w-full z-50">
+    <div class="bg-black/50 table fixed h-full left-0 top-0 w-full z-50" @click="hideModal">
         <div class="table-cell align-middle">
             <div
                 class="bg-white flex flex-col mx-auto my-0 p-8 h-max w-3/6"
                 :class="class"
+                @click.stop
             >
                 <div>
                     <slot name="title" />
@@ -26,6 +27,10 @@ defineProps({
     class: {
         type: Array,
         default: [],
+    },
+    hideModal: {
+        type: Function,
+        required: true,
     },
 });
 </script>

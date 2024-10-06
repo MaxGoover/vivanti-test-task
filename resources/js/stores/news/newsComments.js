@@ -13,6 +13,8 @@ export const useNewsCommentsStore = defineStore("newsComments", {
         count: 0, // кол-во комментариев к статье
         form: useForm(new NewsComment()),
         isLoadedAll: false,
+        isShowedDeleteModal: false,
+        isShowedEditModal: false,
         isShowedLoader: false,
         isShowedReplyModal: false,
         list: [], // список комментариев
@@ -27,7 +29,7 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
     actions: {
         /**
-         * Сохраняет комментарий.
+         * Сохраняет комментарий к статье.
          * @returns {Promise}
          */
         async create() {
@@ -38,6 +40,15 @@ export const useNewsCommentsStore = defineStore("newsComments", {
         },
 
         /**
+         * Удаляет комментарий.
+         *
+         * @returns {Promise}
+         */
+        async delete() {
+            return axios.delete(routeApi.newsComments.delete(this.selected.id));
+        },
+
+        /**
          * Получает комментарии статьи.
          * @returns {Promise}
          */
@@ -45,6 +56,35 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             return axios.get(routeApi.newsComments.index(this.news_id), {
                 params: { page: this.page },
             });
+        },
+
+        /**
+         * Редактирует комментарий статьи.
+         * @returns {Promise}
+         */
+        async update() {
+            return axios.put(
+                routeApi.newsComments.update(this.selected.id),
+                this.form
+            );
+        },
+
+        async deleteComment() {
+            this.delete()
+                .then(() => {
+                    this.clearList();
+                    this.loadComments();
+                    toast.success(
+                        $t("message.success.comment.delete"),
+                        config.toast
+                    );
+                })
+                .catch(() =>
+                    toast.error(
+                        $t("message.error.comment.delete"),
+                        config.toast
+                    )
+                );
         },
 
         async loadComments() {
@@ -83,6 +123,21 @@ export const useNewsCommentsStore = defineStore("newsComments", {
                 .catch((err) => toast.error(err.message, config.toast));
         },
 
+        async updateComment() {
+            this.update()
+                .then(() => {
+                    this.clearList();
+                    this.clearFormParentId();
+                    this.clearFormContent();
+                    this.loadComments();
+                    toast.success(
+                        $t("message.success.comment.update"),
+                        config.toast
+                    );
+                })
+                .catch((err) => toast.error(err.message, config.toast));
+        },
+
         addListComments(comments) {
             this.list = this.list.concat(comments);
         },
@@ -105,6 +160,14 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
         finishLoadComments() {
             this.isLoadedAll = true;
+        },
+
+        hideDeleteModal() {
+            this.isShowedDeleteModal = false;
+        },
+
+        hideEditModal() {
+            this.isShowedEditModal = false;
         },
 
         hideLoader() {
@@ -135,6 +198,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.count = count;
         },
 
+        setFormContent(content) {
+            this.form.content = content;
+        },
+
         setFormNewsId(newsId) {
             this.form.news_id = newsId;
         },
@@ -149,6 +216,14 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
         setSelected(comment) {
             this.selected = clone(comment);
+        },
+
+        showDeleteModal() {
+            this.isShowedDeleteModal = true;
+        },
+
+        showEditModal() {
+            this.isShowedEditModal = true;
         },
 
         showLoader() {

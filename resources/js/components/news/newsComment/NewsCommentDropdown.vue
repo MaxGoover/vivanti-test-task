@@ -22,7 +22,7 @@
                         v-for="menuItem in menu"
                         :key="menuItem.name"
                         class="flex items-center cursor-pointer hover:text-sky-700 hover:bg-gray-100"
-                        @click="menuItem.callback"
+                        @click="[hideDropdown(), menuItem.callback()]"
                     >
                         <component :is="menuItem.icon" class="h-5 m-2" />
                         <span class="block p-2">{{ menuItem.name }}</span>
@@ -60,12 +60,24 @@ const menu = ref([
         icon: ChatBubbleBottomCenterTextIcon,
         name: $t("action.reply"),
         callback: () => {
-            hideDropdown();
             newsComments.showReplyModal();
         },
     },
-    { icon: PencilIcon, name: $t("action.edit"), callback: () => {} },
-    { icon: TrashIcon, name: $t("action.delete"), callback: () => {} },
+    {
+        icon: PencilIcon,
+        name: $t("action.edit"),
+        callback: () => {
+            newsComments.setFormContent(newsComments.selected.content);
+            newsComments.showEditModal();
+        },
+    },
+    {
+        icon: TrashIcon,
+        name: $t("action.delete"),
+        callback: () => {
+            newsComments.showDeleteModal();
+        },
+    },
 ]);
 
 const hideDropdown = () => {

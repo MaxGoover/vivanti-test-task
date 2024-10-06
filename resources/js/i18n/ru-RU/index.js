@@ -1,3 +1,5 @@
+import { comment } from "postcss";
+
 export default {
     action: {
         cancel: "Отменить",
@@ -22,6 +24,9 @@ export default {
     company: {
         name: "Виванти",
     },
+    confirm: {
+        delete: "Вы действительно хотите удалить комментарий",
+    },
     image: {
         avatar: "Аватар",
         logoCompany: "Логотип компании",
@@ -42,7 +47,9 @@ export default {
     message: {
         error: {
             comment: {
+                delete: "Не удалось удалить комментарий",
                 index: "Не удалось загрузить комментарии",
+                update: "Не удалось отредактировать комментарий",
             },
             news: {
                 index: "Не удалось загрузить новости",
@@ -51,6 +58,8 @@ export default {
         success: {
             comment: {
                 create: "Комментарий сохранен успешно",
+                delete: "Комментарий удален успешно",
+                update: "Комментарий отредактирован успешно",
             },
         },
     },
@@ -76,7 +85,13 @@ export default {
         },
     },
     title: {
+        delete: {
+            comment: "Удалить комментарий",
+        },
         discussion: "Обсуждение",
+        edit: {
+            comment: "Редактировать комментарий",
+        },
         readAlso: "Читайте так же",
         reply: {
             comment: "Ответить на комментарий",

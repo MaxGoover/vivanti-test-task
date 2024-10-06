@@ -5,6 +5,8 @@ export default {
     },
     newsComments: {
         create: (id) => `/api/news/${id}/comments`,
+        delete: (id) => `/api/news/comments/${id}`,
         index: (id) => `/api/news/${id}/comments`,
+        update: (id) => `/api/news/comments/${id}`,
     },
 };
