@@ -169,6 +169,7 @@
 <script setup>
 import { $t } from "@/i18n";
 import { ArrowDownCircleIcon } from "@heroicons/vue/24/outline";
+import { Breadcrumb } from "@/entities/Breadcrumb";
 import { ChatBubbleLeftIcon } from "@heroicons/vue/24/solid";
 import { EyeIcon } from "@heroicons/vue/24/solid";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
@@ -178,11 +179,12 @@ import { useNewsCommentsStore } from "@/stores/news/newsComments";
 import { useNewsStore } from "@/stores/news/news";
 import { usePage } from "@inertiajs/vue3";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
-import NewsCommentForm from "@/components/news/newsComment/NewsCommentForm.vue";
 import AppCommentItem from "@/components/AppCommentItem.vue";
 import AppSpinner from "@/components/AppSpinner.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
+import NewsCommentForm from "@/components/news/newsComment/NewsCommentForm.vue";
 import NewsItem from "@/components/news/NewsItem.vue";
+import route from "@/routes";
 
 defineOptions({
     layout: LayoutNews,
@@ -193,24 +195,15 @@ const newsComments = useNewsCommentsStore();
 const page = usePage();
 
 const breadcrumbs = [
-    {
-        href: "/",
-        name: $t("menu.home"),
-    },
-    {
-        href: "/news",
-        name: $t("menu.news"),
-    },
-    {
-        href: `/news/${page.props.news.id}`,
-        name: page.props.news.title,
-    },
+    new Breadcrumb(route.home, $t("menu.home")),
+    new Breadcrumb(route.news.index, $t("menu.news")),
+    new Breadcrumb(route.news.show(page.props.news.id), page.props.news.title),
 ];
 
 const sorts = [
     {
         isActive: true,
-        name: $t("sort.first.new"),
+        name: $t("sort.first.old"),
     },
     {
         isActive: false,

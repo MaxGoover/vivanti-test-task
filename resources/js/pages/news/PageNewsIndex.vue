@@ -16,22 +16,18 @@
 
 <script setup>
 import { $t } from "@/i18n";
+import { Breadcrumb } from "@/entities/Breadcrumb";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
-import NewsItem from "@/components/news/NewsItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";
+import NewsItem from "@/components/news/NewsItem.vue";
+import route from "@/routes";
 
 defineOptions({
     layout: LayoutNews,
 });
 
 const breadcrumbs = [
-    {
-        href: "/",
-        name: $t("menu.home"),
-    },
-    {
-        href: "/news",
-        name: $t("menu.news"),
-    },
+    new Breadcrumb(route.home, $t("menu.home")),
+    new Breadcrumb(route.news.index, $t("menu.news")),
 ];
 </script>
