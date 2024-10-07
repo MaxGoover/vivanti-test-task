@@ -1,5 +1,3 @@
-import { comment } from "postcss";
-
 export default {
     action: {
         cancel: "Отменить",
