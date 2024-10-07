@@ -14,6 +14,7 @@ export const useNewsCommentsStore = defineStore("newsComments", {
         form: useForm(new NewsComment()),
         isLoadedAll: false,
         isShowedDeleteModal: false,
+        isShowedDropdown: false,
         isShowedEditModal: false,
         isShowedLoader: false,
         isShowedReplyModal: false,
@@ -158,12 +159,25 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.form.parent_id = null;
         },
 
+        escapeAll() {
+            this.hideDropdown();
+            this.hideDeleteModal();
+            this.hideEditModal();
+            this.hideReplyModal();
+            this.clearFormParentId();
+            this.clearSelected();
+        },
+
         finishLoadComments() {
             this.isLoadedAll = true;
         },
 
         hideDeleteModal() {
             this.isShowedDeleteModal = false;
+        },
+
+        hideDropdown() {
+            this.isShowedDropdown = false;
         },
 
         hideEditModal() {
@@ -222,6 +236,10 @@ export const useNewsCommentsStore = defineStore("newsComments", {
             this.isShowedDeleteModal = true;
         },
 
+        showDropdown() {
+            this.isShowedDropdown = true;
+        },
+
         showEditModal() {
             this.isShowedEditModal = true;
         },
@@ -232,6 +250,18 @@ export const useNewsCommentsStore = defineStore("newsComments", {
 
         showReplyModal() {
             this.isShowedReplyModal = true;
+        },
+
+        toggleDropdown(comment) {
+            if (!this.isShowedDropdown) {
+                this.setSelected(comment);
+                this.setFormParentId(comment.id);
+                this.showDropdown();
+            } else {
+                this.clearSelected();
+                this.clearFormParentId();
+                this.hideDropdown();
+            }
         },
     },
 });

@@ -17,13 +17,13 @@
         <div>
             <ul class="flex flex-row items-center h-full text-sm font-medium">
                 <li class="ml-2.5">
-                    <NewsMenuDropdown
+                    <NewsDropdown
                         :menu="menuEducation"
                         :title="$t('menu.education')"
                     />
                 </li>
                 <li class="ml-2.5">
-                    <NewsMenuDropdown
+                    <NewsDropdown
                         :menu="menuPublications"
                         :title="$t('menu.experts')"
                     />
@@ -32,7 +32,7 @@
                     {{ $t("menu.publications") }}
                 </li>
                 <li class="ml-2.5 text-white">
-                    <NewsMenuDropdown
+                    <NewsDropdown
                         :menu="menuAboutProject"
                         :title="$t('menu.aboutProject')"
                     />
@@ -56,7 +56,7 @@
 
 <script setup>
 import { $t } from "@/i18n";
-import NewsMenuDropdown from "@/components/news/NewsMenuDropdown.vue";
+import NewsDropdown from "@/components/news/NewsDropdown.vue";
 
 const menuEducation = [
     $t("menu.experts"),
