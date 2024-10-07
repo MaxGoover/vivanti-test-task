@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
 import { useNewsCommentsStore } from "@/stores//news/newsComments";
 import NewsCommentDropdown from "@/components/news/newsComment/NewsCommentDropdown.vue";

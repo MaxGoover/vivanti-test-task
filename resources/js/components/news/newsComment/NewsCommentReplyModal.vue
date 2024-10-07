@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import AppCommentItem from "@/components/AppCommentItem.vue";

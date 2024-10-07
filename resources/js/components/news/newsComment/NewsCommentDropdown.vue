@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import {
     ChatBubbleBottomCenterTextIcon,
     PencilIcon,

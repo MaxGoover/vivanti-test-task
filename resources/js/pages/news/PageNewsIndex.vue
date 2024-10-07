@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
 import NewsItem from "@/components/news/NewsItem.vue";
 import LayoutNews from "@/layouts/LayoutNews.vue";

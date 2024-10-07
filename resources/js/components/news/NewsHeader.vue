@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import NewsMenuDropdown from "@/components/news/NewsMenuDropdown.vue";
 
 const menuEducation = [

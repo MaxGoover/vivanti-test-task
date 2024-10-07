@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import { storeToRefs } from "pinia";
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
 

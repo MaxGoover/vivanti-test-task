@@ -6,7 +6,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import createServer from '@inertiajs/vue3/server';
 
 // Import i18n
-import { i18n } from './boot/i18n';
+import { i18n } from './i18n';
 
 // Import Pinia
 import { createPinia } from "pinia";

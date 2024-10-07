@@ -1,4 +1,4 @@
-import { $t } from "@/boot/i18n";
+import { $t } from "@/i18n";
 import { clone } from "lodash";
 import { defineStore } from "pinia";
 import { NewsComment } from "@/entities/news/NewsComment.js";

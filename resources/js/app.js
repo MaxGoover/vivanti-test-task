@@ -6,7 +6,7 @@ import "../css/global.css";
 import "vue3-toastify/dist/index.css";
 
 // Import i18n
-import { i18n } from './boot/i18n';
+import { i18n } from './i18n';
 
 // Import Pinia
 import { createPinia } from "pinia";
