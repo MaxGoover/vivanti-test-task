@@ -1,5 +1,5 @@
 <template>
-    <div class="font-light text-slate-700 leading-5 grid-container">
+    <div class="font-light text-slate-700 leading-5 comment-grid">
         <!--Аватарка-->
         <div>
             <img
@@ -71,7 +71,6 @@
 <script setup>
 import { $t } from "@/i18n";
 import { HandThumbUpIcon } from "@heroicons/vue/24/outline";
-import { useNewsCommentsStore } from "@/stores//news/newsComments";
 import NewsCommentDropdown from "@/components/news/newsComment/NewsCommentDropdown.vue";
 
 const props = defineProps({
@@ -89,18 +88,9 @@ const props = defineProps({
     },
 });
 
-const newsComments = useNewsCommentsStore();
-
 /**
  *
  * @param {Object} comment
  */
 const hasCommentChildren = (comment) => comment.children.length;
 </script>
-
-<style scoped>
-.grid-container {
-    display: grid;
-    grid-template-columns: 50px 1fr;
-}
-</style>

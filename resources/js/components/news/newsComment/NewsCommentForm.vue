@@ -1,5 +1,14 @@
 <template>
-    <div>
+    <div class="comment-grid">
+        <!--Аватарка-->
+        <div>
+            <img
+                src="/images/user-placeholder.png"
+                class="w-10 h-10 rounded-full border border-2"
+                :alt="$t('image.avatar')"
+            />
+        </div>
+
         <div class="py-2 px-4 bg-white border border-gray-200">
             <textarea
                 v-model="form.content"

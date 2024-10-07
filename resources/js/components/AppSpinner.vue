@@ -2,8 +2,7 @@
     <div>
         <svg
             aria-hidden="true"
-            class="text-gray-200 animate-spin fill-sky-700"
-            :class="`w-${width} h-${height}`"
+            class="text-gray-200 animate-spin fill-sky-700 h-20 w-20"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -20,15 +19,3 @@
     </div>
 </template>
 
-<script setup>
-defineProps({
-    height: {
-        type: String,
-        default: '8',
-    },
-    width: {
-        type: String,
-        default: '8',
-    },
-});
-</script>

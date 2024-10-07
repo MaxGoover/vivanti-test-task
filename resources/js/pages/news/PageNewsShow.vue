@@ -59,7 +59,7 @@
             <NewsCommentForm class="mt-10 mb-6" />
 
             <button
-                class="inline-flex items-center py-3.5 px-20 text-2xl font-normal text-sky-700 border-2 border-sky-700 hover:text-white hover:bg-blue-500"
+                class="inline-flex items-center ml-12 py-3.5 px-20 text-2xl font-normal text-sky-700 border-2 border-sky-700 hover:text-white hover:bg-blue-500"
                 @click="newsComments.saveComment"
             >
                 {{ $t("action.writeMessage") }}
@@ -115,7 +115,7 @@
                     v-if="newsComments.isShowedLoader"
                     class="flex flex-col items-center"
                 >
-                    <AppSpinner class="mb-3" height="20" width="20" />
+                    <AppSpinner class="mb-3" />
                     <span>{{ $t("process.loading") }}</span>
                 </div>
                 <button
@@ -150,7 +150,7 @@
                     v-if="news.isShowedLoader"
                     class="flex flex-col items-center"
                 >
-                    <AppSpinner class="mb-3" height="20" width="20" />
+                    <AppSpinner class="mb-3" />
                     <span>{{ $t("process.loading") }}</span>
                 </div>
                 <button
