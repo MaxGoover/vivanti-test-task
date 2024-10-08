@@ -9,12 +9,16 @@
 
             <div class="p-5">
                 <!--Заголовок новости-->
-                <h5 class="mb-2 text-2xl font-bold tracking-tight news-title">
+                <h5
+                    class="mb-2 text-2xl font-bold tracking-tight line-clamp-1 overflow-hidden text-ellipsis leading-6 max-h-12 pt-0"
+                >
                     {{ news.title }}
                 </h5>
 
                 <!--Содержание новости-->
-                <p class="font-normal text-gray-700 news-content">
+                <p
+                    class="font-normal text-gray-700 line-clamp-6 overflow-hidden text-ellipsis leading-6 max-h-36 pt-0"
+                >
                     {{ news.content }}
                 </p>
             </div>
@@ -33,26 +37,3 @@ defineProps({
     },
 });
 </script>
-
-<style scoped>
-.news-title {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    display: -webkit-box;
-    line-height: 1.5em;
-    max-height: 3em;
-    overflow: hidden;
-    padding-top: 0;
-    text-overflow: ellipsis;
-}
-.news-content {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 6;
-    display: -webkit-box;
-    line-height: 1.5em;
-    max-height: 9em;
-    overflow: hidden;
-    padding-top: 0;
-    text-overflow: ellipsis;
-}
-</style>

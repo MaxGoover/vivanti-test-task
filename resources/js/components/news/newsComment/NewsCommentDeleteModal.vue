@@ -1,5 +1,5 @@
 <template>
-    <transition name="modal">
+    <transition name="modal" >
         <AppModal
             v-if="newsComments.isShowedDeleteModal"
             :hideModal="newsComments.hideDeleteModal"
@@ -46,7 +46,6 @@
 import { useNewsCommentsStore } from "@/stores/news/newsComments";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import AppModal from "@/components/AppModal.vue";
-import NewsCommentForm from "@/components/news/newsComment/NewsCommentForm.vue";
 
 const newsComments = useNewsCommentsStore();
 
