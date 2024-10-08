@@ -14,15 +14,15 @@ final readonly class NewsIndexAction
     {
         try {
             return response()->json([
+                'message' => __('message.success.news.index'),
                 'news' => News::latest()
-                    ->paginate(4)
+                    ->paginate(config('settings.news.pagination.rowsPerPage.show'))
                     ->through(fn($news) => [
                         'content' => $news->previewContent,
                         'countViews' => $news->count_views,
                         'id' => $news->id,
                         'title' => $news->title,
                     ]),
-                'message' => __('message.success.news.index'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([

@@ -11,7 +11,10 @@ return [
             'previewLength' => 500,
         ],
         'pagination' => [
-            'rowsPerPage' => 9,
+            'rowsPerPage' => [
+                'index' => 9,
+                'show' => 4,
+            ],
         ],
     ],
 ];
