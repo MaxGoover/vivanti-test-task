@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace App\Actions\News;
 
+use App\Models\News\News;
 use App\Models\News\NewsComment;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Throwable;
 
 final readonly class NewsCommentIndexAction
 {
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(News $news): JsonResponse
     {
         try {
-            $newsId = $request->route('id');
-
             return response()->json([
-                'comments' => NewsComment::with('children')
-                    ->where('news_id', $newsId)
+                'comments' => $news->comments()
                     ->whereNull('parent_id')
                     ->latest()
                     ->paginate(config('settings.news.comments.pagination.rowsPerPage'))
@@ -30,7 +27,7 @@ final readonly class NewsCommentIndexAction
                         'parent_id' => $comment->parent_id,
                         'title' => $comment->title,
                     ]),
-                'countComments' => NewsComment::where('news_id', $newsId)->count(),
+                'countComments' => $news->countComments,
                 'message' => 'Комментарии к статье получены успешно',
             ], 200);
         } catch (Throwable $error) {

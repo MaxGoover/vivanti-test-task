@@ -16,7 +16,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/news', NewsIndexAction::class);
 
 // NewsComment
-Route::get('/news/{id}/comments', NewsCommentIndexAction::class);
+Route::get('/news/{news}/comments', NewsCommentIndexAction::class);
 Route::post('/news/{id}/comments', NewsCommentCreateAction::class);
 Route::put('/news/comments/{news_comment}', NewsCommentUpdateAction::class);
 Route::delete('/news/comments/{news_comment}', NewsCommentDeleteAction::class);

@@ -28,7 +28,7 @@
                             <ChatBubbleLeftIcon
                                 class="h-5 inline-flex mr-1 text-sky-700"
                             />
-                            {{ $page.props.news.countComments }}
+                            {{ $page.props.countComments }}
                         </li>
                     </ul>
                 </div>
@@ -237,7 +237,7 @@ const loadNews = () => {
 
 onMounted(() => {
     newsComments.setNewsId(page.props.news.id);
-    newsComments.setCount(page.props.news.countComments);
+    newsComments.setCount(page.props.countComments);
     loadNews();
     loadComments();
 });

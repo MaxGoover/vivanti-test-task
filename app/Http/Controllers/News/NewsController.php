@@ -4,7 +4,6 @@ namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
 use App\Models\News\News;
-use App\Models\News\NewsComment;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -42,9 +41,9 @@ class NewsController extends Controller
     public function show(News $news)
     {
         return inertia('news/PageNewsShow', [
+            'countComments' => $news->countComments,
             'news' => [
                 'content' => $news->content,
-                'countComments' => NewsComment::where('news_id', $news->id)->count(),
                 'countViews' => $news->count_views,
                 'created_at' => $news->created_at->format('d.m.Y'),
                 'id' => $news->id,
