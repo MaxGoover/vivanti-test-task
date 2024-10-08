@@ -18,12 +18,12 @@ final readonly class NewsCommentCreateAction
             NewsComment::create($newsCommentData);
 
             return response()->json([
-                'message' => 'Комментарий сохранен успешно',
+                'message' => __('message.success.newsComments.create'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([
-                // 'message' => 'Не удалось сохранить комментарий',
-                'message' => $error->getMessage(),
+                // 'message' => '',
+                'message' =>  __('message.error.newsComments.create'),
             ], 400);
         }
     }

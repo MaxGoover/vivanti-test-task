@@ -18,12 +18,11 @@ final readonly class NewsCommentUpdateAction
             $newsComment->update($newsCommentData);
 
             return response()->json([
-                'message' => 'Комментарий отредактирован успешно',
+                'message' => __('message.success.newsComments.update'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([
-                // 'message' => 'Не удалось отредактировать комментарий',
-                'message' => $error->getMessage(),
+                'message' => __('message.error.newsComments.update'),
             ], 400);
         }
     }

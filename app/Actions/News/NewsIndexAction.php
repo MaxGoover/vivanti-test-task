@@ -22,12 +22,11 @@ final readonly class NewsIndexAction
                         'id' => $news->id,
                         'title' => $news->title,
                     ]),
-                'message' => 'Статьи получены успешно',
+                'message' => __('message.success.news.index'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([
-                // 'message' => 'Не удалось получить статьи',
-                'message' => $error->getMessage(),
+                'message' => __('message.error.news.index'),
             ], 400);
         }
     }

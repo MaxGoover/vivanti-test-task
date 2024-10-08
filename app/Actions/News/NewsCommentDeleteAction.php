@@ -16,12 +16,11 @@ final readonly class NewsCommentDeleteAction
             $newsComment->delete();
 
             return response()->json([
-                'message' => 'Комментарий удалён успешно',
+                'message' => __('message.success.newsComments.delete'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([
-                // 'message' => 'Не удалось удалить комментарий',
-                'message' => $error->getMessage(),
+                'message' => __('message.error.newsComments.delete'),
             ], 400);
         }
     }

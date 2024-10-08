@@ -28,12 +28,11 @@ final readonly class NewsCommentIndexAction
                         'title' => $comment->title,
                     ]),
                 'countComments' => $news->countComments,
-                'message' => 'Комментарии к статье получены успешно',
+                'message' => __('message.success.newsComments.index'),
             ], 200);
         } catch (Throwable $error) {
             return response()->json([
-                // 'message' => 'Не удалось получить комментарии к статье',
-                'message' => $error->getMessage(),
+                'message' => __('message.error.newsComments.index'),
             ], 400);
         }
     }

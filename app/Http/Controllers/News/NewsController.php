@@ -11,6 +11,7 @@ class NewsController extends Controller
     public function index()
     {
         return inertia('news/PageNewsIndex', [
+            'message' => __('message.success.news.index'),
             'news' => News::latest()
                 ->paginate(config('settings.news.pagination.rowsPerPage'))
                 ->through(fn($news) => [
@@ -42,6 +43,7 @@ class NewsController extends Controller
     {
         return inertia('news/PageNewsShow', [
             'countComments' => $news->countComments,
+            'message' => __('message.success.news.show'),
             'news' => [
                 'content' => $news->content,
                 'countViews' => $news->count_views,
